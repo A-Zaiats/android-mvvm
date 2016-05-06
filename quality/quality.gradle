@@ -1,0 +1,71 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
+
+task checkstyle(type: Checkstyle, group: 'verification') {
+    configFile file("${project.rootDir}/quality/checkstyle/checkstyle.xml")
+    configProperties.checkstyleSuppressionsPath = file("${project.rootDir}/quality/checkstyle/suppressions.xml").absolutePath
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+}
+
+task findbugs(type: FindBugs, dependsOn: assemble, group: 'verification') {
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("${project.rootDir}/quality/findbugs/findbugs-filter.xml")
+    classes = files("${project.rootDir}/${project.getName()}/build/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "${project.rootDir}/${project.getName()}/build/reports/findbugs/findbugs.xml"
+        }
+        html {
+            destination "${project.rootDir}/${project.getName()}/build/reports/findbugs/findbugs.html"
+        }
+    }
+
+    classpath = files()
+}
+
+task pmd(type: Pmd, group: 'verification') {
+    ignoreFailures = false
+    ruleSetFiles = files("${project.rootDir}/quality/pmd/pmd-ruleset.xml")
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "${project.rootDir}/${project.getName()}/build/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "${project.rootDir}/${project.getName()}/build/reports/pmd/pmd.html"
+        }
+    }
+}
+
+android {
+    lintOptions {
+        abortOnError true
+        xmlReport false
+        htmlReport true
+        lintConfig file("${project.rootDir}/quality/lint/lint.xml")
+        htmlOutput file("${project.rootDir}/${project.getName()}/build/reports/lint/lint-result.html")
+        xmlOutput file("${project.rootDir}/${project.getName()}/build/reports/lint/lint-result.xml")
+    }
+}
