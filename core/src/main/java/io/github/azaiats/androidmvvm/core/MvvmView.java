@@ -16,6 +16,8 @@
 
 package io.github.azaiats.androidmvvm.core;
 
+import android.support.annotation.NonNull;
+
 /**
  * The root view interface for every mvvm view.
  *
@@ -25,4 +27,18 @@ package io.github.azaiats.androidmvvm.core;
  * @param <T>  ViewModel attached to this view
  */
 public interface MvvmView<T extends MvvmViewModel> {
+
+    /**
+     * Create a ViewModel instance
+     *
+     * @return the {@link MvvmViewModel} for this view
+     */
+    @NonNull T createViewModel();
+
+    /**
+     * Create binging config for this view.
+     *
+     * @return  view binding config.
+     */
+    @NonNull BindingConfig getBindingConfig();
 }
