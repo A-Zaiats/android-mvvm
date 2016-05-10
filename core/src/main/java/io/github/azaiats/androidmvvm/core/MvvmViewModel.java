@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.a_zaiats.android_mvvm.core;
+package io.github.azaiats.androidmvvm.core;
 
 /**
  * The root ViewModel interface for every mvvm ViewModel.

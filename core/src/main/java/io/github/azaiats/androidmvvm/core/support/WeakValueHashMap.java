@@ -1,4 +1,4 @@
-package io.github.a_zaiats.android_mvvm.core.support;
+package io.github.azaiats.androidmvvm.core.support;
 
 /*
  * The contents of this file are subject to the terms

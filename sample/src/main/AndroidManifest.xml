@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.github.a_zaiats.android_mvvm">
+          package="io.github.azaiats.androidmvvm">
 
     <application
         android:allowBackup="true"
