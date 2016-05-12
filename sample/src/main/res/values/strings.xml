@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Android-MVVM Sample</string>
+    <string name="hello">Hello!</string>
+    <string name="hello_name">Hello, %s!</string>
+    <string name="clear_name_button">Clear name</string>
+    <string name="hint_enter_name">Enter your name</string>
 </resources>
