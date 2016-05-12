@@ -47,33 +47,33 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
     @CallSuper
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        delegate.onDestroy();
+        getMvvmDelegate().onCreate();
     }
 
     @Override
     @CallSuper
     protected void onDestroy() {
         super.onDestroy();
-        delegate.onDestroy();
+        getMvvmDelegate().onDestroy();
     }
 
     @Override
     @CallSuper
     protected void onPause() {
         super.onPause();
-        delegate.onPause();
+        getMvvmDelegate().onPause();
     }
 
     @Override
     @CallSuper
     protected void onResume() {
         super.onResume();
-        delegate.onResume();
+        getMvvmDelegate().onResume();
     }
 
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
-        return delegate.onRetainCustomNonConfigurationInstance();
+        return getMvvmDelegate().onRetainCustomNonConfigurationInstance();
     }
 
     @NonNull
