@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.core.common;
 
 import android.support.annotation.LayoutRes;
 
+import io.github.azaiats.androidmvvm.core.BR;
 
 /**
  * Binging configuration params holder.
@@ -29,7 +30,8 @@ import android.support.annotation.LayoutRes;
  */
 public class BindingConfig {
 
-    @LayoutRes private final int layoutResource;
+    @LayoutRes
+    private final int layoutResource;
     private final int viewModelVariableName;
 
     /**
@@ -47,7 +49,7 @@ public class BindingConfig {
     /**
      * Create a BindingConfig object for an Activity/Fragment with default variable name.
      *
-     * @param layoutResource  layout resource id
+     * @param layoutResource layout resource id
      */
     public BindingConfig(@LayoutRes int layoutResource) {
         this(layoutResource, BR.viewModel);
@@ -56,7 +58,7 @@ public class BindingConfig {
     /**
      * Returns layout resource id.
      *
-     * @return  layout resource id.
+     * @return layout resource id.
      */
     public int getLayoutResource() {
         return layoutResource;
@@ -65,7 +67,7 @@ public class BindingConfig {
     /**
      * Returns variable name for attached ViewModel.
      *
-     * @return  ViewModel variable name.
+     * @return ViewModel variable name.
      */
     public int getViewModelVariableName() {
         return viewModelVariableName;

@@ -14,27 +14,39 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.core.common;
+
+import android.databinding.BaseObservable;
+import android.support.annotation.CallSuper;
 
 /**
- * The root ViewModel interface for every mvvm ViewModel.
+ * ViewModel base class. Every ViewModel must extend this class.
  *
  * @author Andrei Zaiats
  * @since 0.1.0
  */
-public interface MvvmViewModel {
+public abstract class BaseViewModel extends BaseObservable implements MvvmViewModel {
+
+    private boolean running;
 
     /**
      * Called when this ViewModel instance was created.
      * <p>
      * This is a place to do any initialisation.
      */
-    void onCreate();
+    @Override
+    @CallSuper
+    public void onCreate() {
+    }
 
     /**
      * Called when this ViewModel was binded to a view and the view is visible.
      */
-    void onResume();
+    @Override
+    @CallSuper
+    public void onResume() {
+        running = true;
+    }
 
     /**
      * Called when this ViewModel was unbinded from a view or view was paused.
@@ -42,12 +54,28 @@ public interface MvvmViewModel {
      * Don't interact with view after this method was called
      * (e.g. show toast or start new activity).
      */
-    void onPause();
+    @Override
+    @CallSuper
+    public void onPause() {
+        running = false;
+    }
 
     /**
      * Called when this ViewModel instance was destroyed and removed from cache.
      * <p>
      * This is a place to do any cleanup to avoid memory leaks.
      */
-    void onDestroy();
+    @Override
+    @CallSuper
+    public void onDestroy() {
+    }
+
+    /**
+     * Returns true if this ViewModel is attached to view end the view is in running state (not paused).
+     *
+     * @return true if running
+     */
+    protected boolean isRunning() {
+        return running;
+    }
 }

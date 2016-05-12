@@ -14,31 +14,40 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.core.common;
 
+import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 
 /**
  * The root view interface for every mvvm view.
  *
+ * @param <T> generated Data Binding layout class
+ * @param <S> ViewModel binded to this view
  * @author Andrei Zaiats
  * @since 0.1.0
- *
- * @param <T>  ViewModel attached to this view
  */
-public interface MvvmView<T extends MvvmViewModel> {
-
-    /**
-     * Create a ViewModel instance
-     *
-     * @return the {@link MvvmViewModel} for this view
-     */
-    @NonNull T createViewModel();
+public interface MvvmView<T extends ViewDataBinding, S extends MvvmViewModel> {
 
     /**
      * Create binging config for this view.
      *
-     * @return  view binding config.
+     * @return view binding config.
      */
-    @NonNull BindingConfig getBindingConfig();
+    @NonNull
+    BindingConfig getBindingConfig();
+
+    /**
+     * Setter for Data Binding instance.
+     *
+     * @param binding the binding for this view
+     */
+    void setBinding(@NonNull T binding);
+
+    /**
+     * Setter for ViewModel instance.
+     *
+     * @param viewModel binded ViewModel
+     */
+    void setViewModel(@NonNull S viewModel);
 }
