@@ -11,7 +11,7 @@ branches:
 notifications:
   email:
   - andrei.zaiats@gmail.com
-script: ./gradle build --stacktrace
+script: ./gradlew build --stacktrace
 cache:
   directories:
   - "$HOME/.gradle"
