@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/clear_name_button"
-            android:onClick="@{viewModel.onNameClear}"
+            android:onClick="@{viewModel::onNameClear}"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"/>
 

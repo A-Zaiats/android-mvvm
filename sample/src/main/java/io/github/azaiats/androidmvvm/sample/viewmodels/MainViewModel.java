@@ -20,6 +20,11 @@ public class MainViewModel extends BaseViewModel {
         return name;
     }
 
+    /**
+     * Setter for name.
+     *
+     * @param name an entered name
+     */
     public void setName(String name) {
         if (TextUtils.equals(this.name, name)) return;
 
@@ -27,6 +32,11 @@ public class MainViewModel extends BaseViewModel {
         notifyPropertyChanged(BR.name);
     }
 
+    /**
+     * Clear current name.
+     *
+     * @param view an interacted view
+     */
     public void onNameClear(View view) {
         setName(null);
     }
