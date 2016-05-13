@@ -126,7 +126,7 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
      * @return the {@link ActivityDelegate} for current activity
      */
     @NonNull
-    private ActivityDelegate<T, S> getMvvmDelegate() {
+    protected ActivityDelegate<T, S> getMvvmDelegate() {
         if (delegate == null) {
             delegate = new ActivityDelegate<>(this, this);
         }
