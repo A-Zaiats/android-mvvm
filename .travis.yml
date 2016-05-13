@@ -1,0 +1,17 @@
+language: android
+jdk: oraclejdk7
+
+android:
+  components:
+  - build-tools-23.0.3
+  - android-23
+branches:
+  except:
+  - gh-pages
+notifications:
+  email:
+  - andrei.zaiats@gmail.com
+script: ./gradle build --stacktrace
+cache:
+  directories:
+  - "$HOME/.gradle"

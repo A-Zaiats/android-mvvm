@@ -1,6 +1,8 @@
 # android-mvvm
 A Model-View-ViewModel library for Android apps
 
+[![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=master)](https://travis-ci.org/A-Zaiats/android-mvvm)
+
 ## Contributors
 - Andrei Zaiats (andrei.zaiats@gmail.com)
 
