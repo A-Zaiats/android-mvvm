@@ -17,66 +17,61 @@
 package io.github.azaiats.androidmvvm.core;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.util.ActivityController;
 
-import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
+import io.github.azaiats.androidmvvm.core.mocks.TestMvvmActivity;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Andrei Zaiats
  */
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(sdk = 21, constants = BuildConfig.class)
 public class MvvmActivityTest {
 
-    private static final String IGNORE_REASON = "need Robolectric integration";
-    @Mock
-    private ActivityDelegate delegate;
-
-    @Spy
     private MvvmActivity activity;
+    private ActivityController<TestMvvmActivity> activityController;
 
     @Before
     public void init() {
-        MockitoAnnotations.initMocks(this);
-        when(activity.getMvvmDelegate()).thenReturn(delegate);
+        activityController = Robolectric.buildActivity(TestMvvmActivity.class);
+        activity = activityController.get();
     }
 
-    @Ignore(IGNORE_REASON)
     @Test
     public void testOnCreateDelegated() {
-        activity.onCreate(null);
-        verify(delegate).onCreate();
+        activityController.create();
+        verify(activity.getMvvmDelegate()).onCreate();
     }
 
-    @Ignore(IGNORE_REASON)
     @Test
     public void testOnDestroyDelegated() {
-        activity.onDestroy();
-        verify(delegate).onDestroy();
+        activityController.create().destroy();
+        verify(activity.getMvvmDelegate()).onDestroy();
     }
 
-    @Ignore(IGNORE_REASON)
     @Test
     public void testOnPauseDelegated() {
-        activity.onPause();
-        verify(delegate).onPause();
+        activityController.create().pause();
+        verify(activity.getMvvmDelegate()).onPause();
     }
 
-    @Ignore(IGNORE_REASON)
     @Test
     public void testOnResumeDelegated() {
+        activityController.create();
         activity.onResume();
-        verify(delegate).onResume();
+        verify(activity.getMvvmDelegate()).onResume();
     }
 
     @Test
     public void testOnRetainCustomNonConfigurationInstanceDelegated() {
         activity.onRetainNonConfigurationInstance();
-        verify(delegate).onRetainCustomNonConfigurationInstance();
+        verify(activity.getMvvmDelegate()).onRetainCustomNonConfigurationInstance();
     }
 }

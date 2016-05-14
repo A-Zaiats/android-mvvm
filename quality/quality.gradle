@@ -60,6 +60,11 @@ task pmd(type: Pmd, group: 'verification') {
     }
 }
 
+jacoco {
+    // Don't update jacoco while bug https://github.com/jacoco/jacoco/pull/288
+    toolVersion = "0.7.2.201409121644"
+}
+
 def coverageSourceDirs = [
         'src/main/java'
 ]

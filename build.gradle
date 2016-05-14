@@ -31,4 +31,5 @@ ext {
     support_version = '23.4.0'
     junit_version = '4.12'
     mockito_version = '2.0.52-beta'
+    robolectric_version = '3.0'
 }

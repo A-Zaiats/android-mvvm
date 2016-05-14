@@ -28,7 +28,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:appcompat-v7:$rootProject.ext.support_version"
+
     testCompile "junit:junit:$rootProject.ext.junit_version"
     testCompile "org.mockito:mockito-core:$rootProject.ext.mockito_version"
-    compile "com.android.support:appcompat-v7:$rootProject.ext.support_version"
+    testCompile "org.robolectric:robolectric:$rootProject.ext.robolectric_version"
 }
