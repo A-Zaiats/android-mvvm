@@ -14,7 +14,9 @@ branches:
 notifications:
   email:
   - andrei.zaiats@gmail.com
-script: ./gradlew build --stacktrace
+script: ./gradlew clean check jacocoTestReport --stacktrace
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 cache:
   directories:
   - "$HOME/.gradle"
