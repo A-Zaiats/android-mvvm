@@ -1,6 +1,7 @@
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
+apply plugin: 'jacoco'
 
 check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
@@ -56,6 +57,40 @@ task pmd(type: Pmd, group: 'verification') {
         html {
             destination "${project.rootDir}/${project.getName()}/build/reports/pmd/pmd.html"
         }
+    }
+}
+
+def coverageSourceDirs = [
+        'src/main/java'
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Reporting"
+
+    description = "Generate Jacoco coverage reports"
+
+    classDirectories = fileTree(
+            dir: 'build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/BR.class',
+                       '**/R$*.class',
+                       '**/*$ViewInjector*.*',
+                       '**/BuildConfig.*',
+                       '**/Manifest*.*',
+                       '**/databinding/**',
+                       'io/github/azaiats/androidmvvm/core/support/WeakValueHashMap.class',
+                       'io/github/azaiats/androidmvvm/core/support/WeakValueHashMap$*.class'
+
+            ]
+    )
+
+    additionalSourceDirs = files(coverageSourceDirs)
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files('build/jacoco/testDebugUnitTest.exec')
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
     }
 }
 

@@ -18,3 +18,5 @@ script: ./gradlew build --stacktrace
 cache:
   directories:
   - "$HOME/.gradle"
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
