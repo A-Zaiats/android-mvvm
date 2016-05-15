@@ -2,7 +2,7 @@
 A Model-View-ViewModel library for Android apps
 
 [![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=master)](https://travis-ci.org/A-Zaiats/android-mvvm)
-[![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/branch/master/graph/badge.svg)](https://codecov.io/gh/A-Zaiats/android-mvvm)
+[![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg)](https://codecov.io/gh/A-Zaiats/android-mvvm)
 
 
 ## Contributors
