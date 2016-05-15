@@ -19,16 +19,16 @@ package io.github.azaiats.androidmvvm.core.delegates;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import io.github.azaiats.androidmvvm.core.common.BindingConfig;
-import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
+import io.github.azaiats.androidmvvm.core.delegates.internal.MvvmDelegate;
 
 /**
  * A delegate for Activities lifecycle.
- * <p>
+ * <p/>
  * The following methods must be invoked from the corresponding Activities lifecycle methods:
  * <ul>
  * <li>{@link #onCreate()}
@@ -43,14 +43,11 @@ import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
  * @author Andrei Zaiats
  * @since 0.1.0
  */
-public class ActivityDelegate<T extends ViewDataBinding, S extends MvvmViewModel> {
-
-    private static final String BINDING_VARIABLE_ERROR_TEXT = "Binding variable wasn't set successfully. "
-            + "Probably viewModelVariableName of your BindingConfig of %s doesn't match any variable in %s.";
+public class ActivityDelegate<T extends ViewDataBinding, S extends MvvmViewModel>
+        extends MvvmDelegate<T, S> {
 
     private final ActivityDelegateCallback<T, S> callback;
     private final Activity delegatedActivity;
-    private S viewModel;
 
     /**
      * Create delegate for activity.
@@ -59,59 +56,9 @@ public class ActivityDelegate<T extends ViewDataBinding, S extends MvvmViewModel
      * @param delegatedActivity the {@link Activity} for delegation
      */
     public ActivityDelegate(@NonNull ActivityDelegateCallback<T, S> callback, @NonNull Activity delegatedActivity) {
+        super(callback);
         this.callback = callback;
         this.delegatedActivity = delegatedActivity;
-    }
-
-    /**
-     * This method must be called from {@link Activity#onCreate(android.os.Bundle)}
-     */
-    @SuppressWarnings("unchecked")
-    public void onCreate() {
-        final MvvmView<T, S> view = callback.getView();
-        final BindingConfig bindingConfig = view.getBindingConfig();
-        viewModel = (S) callback.getLastCustomNonConfigurationInstance();
-        if (viewModel == null) {
-            viewModel = callback.createViewModel();
-        }
-
-        T binding = DataBindingUtil.setContentView(delegatedActivity, bindingConfig.getLayoutResource());
-        if (!binding.setVariable(bindingConfig.getViewModelVariableName(), viewModel)) {
-            throw new IllegalArgumentException(
-                    String.format(BINDING_VARIABLE_ERROR_TEXT,
-                            view.getClass().getSimpleName(),
-                            binding.getClass().getSimpleName()
-                    ));
-        }
-
-        view.setViewModel(viewModel);
-        view.setBinding(binding);
-        viewModel.onCreate();
-    }
-
-    /**
-     * This method must be called from {@link Activity#onResume()}
-     */
-    public void onResume() {
-        viewModel.onResume();
-    }
-
-    /**
-     * This method must be called from {@link Activity#onPause()}
-     */
-    public void onPause() {
-        viewModel.onPause();
-    }
-
-    /**
-     * This method must be called from {@link Activity#onDestroy()}
-     */
-    public void onDestroy() {
-        if (viewModel == null) return;
-
-        if (delegatedActivity.isFinishing()) {
-            viewModel.onDestroy();
-        }
     }
 
     /**
@@ -123,10 +70,28 @@ public class ActivityDelegate<T extends ViewDataBinding, S extends MvvmViewModel
      */
     @Nullable
     public Object onRetainCustomNonConfigurationInstance() {
-        if (!delegatedActivity.isChangingConfigurations()) {
+        if (!delegatedActivity.isChangingConfigurations() && viewModel != null) {
             viewModel.onDestroy();
             viewModel = null;
         }
         return viewModel;
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return delegatedActivity.isFinishing();
+    }
+
+    @Nullable
+    @Override
+    @SuppressWarnings("unchecked")
+    protected S getCachedViewModel() {
+        return (S) callback.getLastCustomNonConfigurationInstance();
+    }
+
+    @NonNull
+    @Override
+    protected T createDataBinding(@LayoutRes int layoutResource) {
+        return DataBindingUtil.setContentView(delegatedActivity, layoutResource);
     }
 }

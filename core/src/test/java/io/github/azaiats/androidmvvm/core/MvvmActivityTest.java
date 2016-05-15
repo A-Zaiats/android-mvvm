@@ -74,4 +74,14 @@ public class MvvmActivityTest {
         activity.onRetainNonConfigurationInstance();
         verify(activity.getMvvmDelegate()).onRetainCustomNonConfigurationInstance();
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void testAvoidBindingUsageBeforeInitialization() {
+        activity.getBinding();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testAvoidViewModelUsageBeforeInitialization() {
+        activity.getViewModel();
+    }
 }

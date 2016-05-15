@@ -28,8 +28,10 @@ import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
 import io.github.azaiats.androidmvvm.core.utils.ReflectionUtils;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertSame;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -57,36 +59,6 @@ public class ActivityDelegateTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void testResumeViewModelOnActivityResume() {
-        setViewModel();
-        activityDelegate.onResume();
-        verify(viewModel).onResume();
-    }
-
-    @Test
-    public void testPauseViewModelOnActivityPause() {
-        setViewModel();
-        activityDelegate.onPause();
-        verify(viewModel).onPause();
-    }
-
-    @Test
-    public void testDestroyViewModelIfActivityFinished() {
-        setViewModel();
-        when(activity.isFinishing()).thenReturn(true);
-        activityDelegate.onDestroy();
-        verify(viewModel).onDestroy();
-    }
-
-    @Test
-    public void testNotDestroyViewModelIfActivityNotFinished() {
-        setViewModel();
-        when(activity.isFinishing()).thenReturn(false);
-        activityDelegate.onDestroy();
-        verify(viewModel, never()).onDestroy();
     }
 
     @Test
@@ -120,7 +92,20 @@ public class ActivityDelegateTest {
         assertSame(viewModel, activityDelegate.onRetainCustomNonConfigurationInstance());
     }
 
+    @Test
+    public void testDelegateToActivityFinishingCheck() {
+        when(activity.isFinishing()).thenReturn(true).thenReturn(false);
+        assertTrue(activityDelegate.isFinished());
+        assertFalse(activityDelegate.isFinished());
+    }
+
+    @Test
+    public void testGetCachedViewModelFromCallback() {
+        when(callback.getLastCustomNonConfigurationInstance()).thenReturn(viewModel);
+        assertSame(activityDelegate.getCachedViewModel(), viewModel);
+    }
+
     private void setViewModel() {
-        ReflectionUtils.setPrivateField(activityDelegate, "viewModel", viewModel);
+        ReflectionUtils.setParentField(activityDelegate, "viewModel", viewModel);
     }
 }

@@ -16,9 +16,6 @@
 
 package io.github.azaiats.androidmvvm.core.utils;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-
 import java.lang.reflect.Field;
 
 /**
@@ -36,15 +33,55 @@ public final class ReflectionUtils {
      * @param fieldName injected field
      * @param value     injected value
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     public static void setPrivateField(Object instance, String fieldName, Object value) {
         try {
             final Field field = instance.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            field.set(instance, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+            setField(field, instance, value);
+        } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    /**
+     * Inject value to inherited field
+     *
+     * @param instance  the target of injection
+     * @param fieldName injected field
+     * @param value     injected value
+     */
+    public static void setParentField(Object instance, String fieldName, Object value) {
+        final Field field = getParentField(instance.getClass(), fieldName);
+        if (field == null) {
+            throw new RuntimeException(new NoSuchFieldException());
+        }
+        setField(field, instance, value);
+    }
+
+    private static void setField(Field field, Object instance, Object value) {
+        field.setAccessible(true);
+        try {
+            field.set(instance, value);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Field getParentField(Class<?> instance, String fieldName) {
+        final Class<?> superclass = instance.getSuperclass();
+        if (superclass == null) {
+            throw new RuntimeException(new NoSuchFieldException());
+        }
+        Field field = fieldByName(superclass.getDeclaredFields(), fieldName);
+        return field == null ? getParentField(superclass, fieldName) : field;
+    }
+
+    private static Field fieldByName(Field[] fields, String fieldName) {
+        for (Field field : fields) {
+            if (field.getName().equals(fieldName)) {
+                return field;
+            }
+        }
+        return null;
     }
 }
