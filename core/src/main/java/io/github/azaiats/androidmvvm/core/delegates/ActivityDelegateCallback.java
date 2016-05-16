@@ -24,15 +24,14 @@ import io.github.azaiats.androidmvvm.core.delegates.internal.DelegateCallback;
 
 /**
  * The MvvmDelegate callback for activity.
- * <p/>
+ * <p>
  * This callback will be called from {@link ActivityDelegate}.
  * It must be implemented by all Activities that you want to support library's mvvm.
- * <p/>
  *
  * @param <T> the type of {@link ViewDataBinding}
  * @param <S> the type of binded {@link MvvmViewModel}
  * @author Andrei Zaiats
- * @see {@link io.github.azaiats.androidmvvm.core.MvvmActivity} for example of implementation.
+ * @see io.github.azaiats.androidmvvm.core.MvvmActivity for example of implementation.
  * @since 0.1.0
  */
 public interface ActivityDelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel>

@@ -28,7 +28,7 @@ import io.github.azaiats.androidmvvm.core.delegates.internal.MvvmDelegate;
 
 /**
  * A delegate for Activities lifecycle.
- * <p/>
+ * <p>
  * The following methods must be invoked from the corresponding Activities lifecycle methods:
  * <ul>
  * <li>{@link #onCreate()}

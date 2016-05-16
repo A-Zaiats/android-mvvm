@@ -27,7 +27,7 @@ import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
 
 /**
  * A base delegate for Activities/Fragments lifecycle.
- * <p/>
+ * <p>
  * The following methods must be invoked from the corresponding Activities lifecycle methods:
  * <ul>
  * <li>{@link #onCreate()}
@@ -62,7 +62,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
 
     /**
      * This method must be called from {@link android.app.Activity#onCreate(android.os.Bundle)}
-     * <p/>
+     * <p>
      * Create a ViewDataBinding and a MvvmViewModel, attach them to the processed view.
      */
     public void onCreate() {
