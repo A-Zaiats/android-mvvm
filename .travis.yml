@@ -14,9 +14,10 @@ branches:
 notifications:
   email:
   - andrei.zaiats@gmail.com
-script: ./gradlew clean check jacocoTestReport --stacktrace
+script: ./gradlew build check jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - ./gradlew bintrayUpload -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_KEY
 cache:
   directories:
   - "$HOME/.gradle"

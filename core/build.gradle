@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 apply from: '../quality/quality.gradle'
 
 android {
@@ -33,4 +34,16 @@ dependencies {
     testCompile "junit:junit:$rootProject.ext.junit_version"
     testCompile "org.mockito:mockito-core:$rootProject.ext.mockito_version"
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectric_version"
+}
+
+publish {
+    groupId = GROUP
+    artifactId = 'core'
+    version = VERSION_NAME
+    uploadName = GROUP + ':core'
+    description = DESCRIPTION
+    website = WEBSITE
+    issueTracker = ISSUE_TRACKER
+    repository = REPOSITORY
+    dryRun = VERSION_NAME.contains("SNAPSHOT")
 }
