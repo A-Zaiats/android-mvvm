@@ -5,6 +5,11 @@ A Model-View-ViewModel library for Android apps
 [![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg)](https://codecov.io/gh/A-Zaiats/android-mvvm)
 [ ![Download](https://api.bintray.com/packages/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/images/download.svg) ](https://bintray.com/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/_latestVersion)
 
+## Features
+This library helps reduce boilerplate code in android applications:
+- a useful implementation of Model-View-ViewModel pattern by leveraging the new Android Data Binding.
+- automating bind ViewModel with view.
+- ViewModel is isolated from Activity/Fragment lifecycle. It's particularly good at surviving configuration changes when Android destroys your Activity and Views and replaces them with new ones.
 
 ## Contributors
 - Andrei Zaiats (andrei.zaiats@gmail.com)
