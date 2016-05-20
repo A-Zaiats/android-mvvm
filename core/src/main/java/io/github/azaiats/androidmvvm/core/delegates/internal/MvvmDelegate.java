@@ -17,6 +17,7 @@
 package io.github.azaiats.androidmvvm.core.delegates.internal;
 
 import android.databinding.ViewDataBinding;
+import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -65,6 +66,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
      * <p>
      * Create a ViewDataBinding and a MvvmViewModel, attach them to the processed view.
      */
+    @CallSuper
     public void onCreate() {
         final MvvmView<T, S> view = callback.getView();
         final BindingConfig bindingConfig = view.getBindingConfig();
@@ -78,6 +80,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
      * This method must be called from {@link android.app.Activity#onResume()}
      * or {@link android.support.v4.app.Fragment#onResume()}.
      */
+    @CallSuper
     public void onResume() {
         if (viewModel != null) viewModel.onResume();
     }
@@ -86,6 +89,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
      * This method must be called from {@link android.app.Activity#onPause()}
      * or {@link android.support.v4.app.Fragment#onPause()}.
      */
+    @CallSuper
     public void onPause() {
         if (viewModel != null) viewModel.onPause();
     }
@@ -94,6 +98,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
      * This method must be called from {@link android.app.Activity#onDestroy()}
      * or {@link android.support.v4.app.Fragment#onDestroy()}.
      */
+    @CallSuper
     public void onDestroy() {
         if (viewModel == null) return;
 
@@ -111,7 +116,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
     @NonNull
     protected abstract T createDataBinding(@LayoutRes int layoutResource);
 
-    S initViewModel() {
+    protected S initViewModel() {
         S viewModel = getCachedViewModel();
         if (viewModel == null) {
             viewModel = callback.createViewModel();
@@ -121,7 +126,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
         return viewModel;
     }
 
-    T initBinding(BindingConfig bindingConfig) {
+    protected T initBinding(BindingConfig bindingConfig) {
         T binding = createDataBinding(bindingConfig.getLayoutResource());
         if (!binding.setVariable(bindingConfig.getViewModelVariableName(), this.viewModel)) {
             throw new IllegalArgumentException(
