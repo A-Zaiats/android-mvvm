@@ -11,6 +11,28 @@ This library helps reduce boilerplate code in android applications:
 - automating bind ViewModel with view.
 - ViewModel is isolated from Activity/Fragment lifecycle. It's particularly good at surviving configuration changes when Android destroys your Activity and Views and replaces them with new ones.
 
+## Installation
+
+    repositories {
+        maven { url "https://dl.bintray.com/a-zaiats/maven" }
+    }
+
+    dependencies {
+        compile 'io.github.azaiats.androidmvvm:core:0.1.2'
+    }
+
+Don't forget to **enable Data Binding** in your module:
+
+    android {
+        dataBinding {
+            enabled = true;
+        }
+    }
+
+
+## Changelog
+The changelog can be found in the [release section](https://github.com/A-Zaiats/android-mvvm/releases)
+
 ## Contributors
 - Andrei Zaiats (andrei.zaiats@gmail.com)
 
