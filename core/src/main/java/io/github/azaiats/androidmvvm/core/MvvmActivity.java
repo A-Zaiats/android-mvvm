@@ -16,12 +16,16 @@
 
 package io.github.azaiats.androidmvvm.core;
 
+import android.databinding.Observable;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
@@ -39,6 +43,7 @@ import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegateCallback;
 public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmViewModel> extends AppCompatActivity
         implements MvvmView<T, S>, ActivityDelegateCallback<T, S> {
 
+    private List<Observable.OnPropertyChangedCallback> onPropertyChangedCallbacks = new ArrayList<>();
     private ActivityDelegate<T, S> delegate;
     private T binding;
     private S viewModel;
@@ -53,15 +58,16 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
     @Override
     @CallSuper
     protected void onDestroy() {
-        super.onDestroy();
+        removeOnPropertyChangedCallbacks();
         getMvvmDelegate().onDestroy();
+        super.onDestroy();
     }
 
     @Override
     @CallSuper
     protected void onPause() {
-        super.onPause();
         getMvvmDelegate().onPause();
+        super.onPause();
     }
 
     @Override
@@ -121,6 +127,19 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
     }
 
     /**
+     * Add an Observable.OnPropertyChangedCallback to ViewModel that will be removed on View destroy
+     * <p>
+     * Use this method to add Observable.OnPropertyChangedCallback to ViewModel. All callbacks will be removed on
+     * View destroy. It helps avoid memory leaks via callbacks.
+     *
+     * @param callback the callback to start listening
+     */
+    protected void addOnPropertyChangedCallback(Observable.OnPropertyChangedCallback callback) {
+        onPropertyChangedCallbacks.add(callback);
+        getViewModel().addOnPropertyChangedCallback(callback);
+    }
+
+    /**
      * Create delegate for the current activity.
      *
      * @return the {@link ActivityDelegate} for current activity
@@ -131,5 +150,11 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
             delegate = new ActivityDelegate<>(this, this);
         }
         return delegate;
+    }
+
+    private void removeOnPropertyChangedCallbacks() {
+        for (Observable.OnPropertyChangedCallback callback : onPropertyChangedCallbacks) {
+            getViewModel().removeOnPropertyChangedCallback(callback);
+        }
     }
 }

@@ -16,6 +16,8 @@
 
 package io.github.azaiats.androidmvvm.core;
 
+import android.databinding.Observable;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +28,7 @@ import org.robolectric.util.ActivityController;
 
 import io.github.azaiats.androidmvvm.core.mocks.TestMvvmActivity;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -83,5 +86,33 @@ public class MvvmActivityTest {
     @Test(expected = IllegalStateException.class)
     public void testAvoidViewModelUsageBeforeInitialization() {
         activity.getViewModel();
+    }
+
+    @Test
+    public void testOnPropertyChangedCallbacksAddedToViewModel() {
+        final Observable.OnPropertyChangedCallback firstCallback = mock(Observable.OnPropertyChangedCallback.class);
+        final Observable.OnPropertyChangedCallback secondCallback = mock(Observable.OnPropertyChangedCallback.class);
+        activityController.create();
+        activity.setViewModel(activity.createViewModel());
+
+        activity.addOnPropertyChangedCallback(firstCallback);
+        activity.addOnPropertyChangedCallback(secondCallback);
+
+        verify(activity.getViewModel()).addOnPropertyChangedCallback(firstCallback);
+        verify(activity.getViewModel()).addOnPropertyChangedCallback(secondCallback);
+    }
+
+    @Test
+    public void testRemoveOnPropertyChangedCallbacksOnActivityDestroy() {
+        final Observable.OnPropertyChangedCallback firstCallback = mock(Observable.OnPropertyChangedCallback.class);
+        final Observable.OnPropertyChangedCallback secondCallback = mock(Observable.OnPropertyChangedCallback.class);
+        activityController.create();
+        activity.setViewModel(activity.createViewModel());
+        activity.addOnPropertyChangedCallback(firstCallback);
+        activity.addOnPropertyChangedCallback(secondCallback);
+
+        activity.onDestroy();
+        verify(activity.getViewModel()).removeOnPropertyChangedCallback(firstCallback);
+        verify(activity.getViewModel()).removeOnPropertyChangedCallback(secondCallback);
     }
 }

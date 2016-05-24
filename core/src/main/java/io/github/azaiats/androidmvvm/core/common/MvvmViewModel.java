@@ -16,13 +16,15 @@
 
 package io.github.azaiats.androidmvvm.core.common;
 
+import android.databinding.Observable;
+
 /**
  * The root ViewModel interface for every mvvm ViewModel.
  *
  * @author Andrei Zaiats
  * @since 0.1.0
  */
-public interface MvvmViewModel {
+public interface MvvmViewModel extends Observable {
 
     /**
      * Called when this ViewModel instance was created.
