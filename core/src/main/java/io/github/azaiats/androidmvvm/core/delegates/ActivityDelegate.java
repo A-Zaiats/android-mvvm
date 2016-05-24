@@ -24,7 +24,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.delegates.internal.MvvmDelegate;
 
 /**
  * A delegate for Activities lifecycle.

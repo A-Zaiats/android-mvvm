@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.mocks;
+package io.github.azaiats.androidmvvm.core.delegates;
 
 import android.app.Activity;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 
 import io.github.azaiats.androidmvvm.core.common.BindingConfig;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingActivityDelegate;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingActivityDelegateCallback;
 
 /**
  * @author Andrei Zaiats
@@ -41,7 +39,7 @@ public class TestNavigatingActivityDelegate extends NavigatingActivityDelegate {
 
     // DataBindingUtils can't be mocked
     @Override
-    protected ViewDataBinding initBinding(BindingConfig bindingConfig) {
+    ViewDataBinding initBinding(BindingConfig bindingConfig) {
         return null;
     }
 }

@@ -20,7 +20,6 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.Nullable;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.delegates.internal.DelegateCallback;
 
 /**
  * The MvvmDelegate callback for activity.

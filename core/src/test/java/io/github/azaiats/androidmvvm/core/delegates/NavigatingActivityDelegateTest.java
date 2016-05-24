@@ -28,9 +28,8 @@ import io.github.azaiats.androidmvvm.core.common.BindingConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.core.common.Navigator;
-import io.github.azaiats.androidmvvm.core.mocks.TestNavigatingActivityDelegate;
-import io.github.azaiats.androidmvvm.core.utils.ReflectionUtils;
 
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -74,9 +73,14 @@ public class NavigatingActivityDelegateTest {
 
     @Test
     public void testRemoveNavigatorOnDestroy() {
-        ReflectionUtils.setParentField(delegate, "viewModel", viewModel);
+        delegate.viewModel = viewModel;
         delegate.onDestroy();
         verify(viewModel).setNavigator(null);
     }
 
+    @Test
+    public void testNoNullPointerOnNavigatorDeleteIfViewModelRemoved() {
+        assertNull(delegate.viewModel);
+        delegate.onDestroy();
+    }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.delegates.internal;
+package io.github.azaiats.androidmvvm.core.delegates;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.CallSuper;
@@ -42,7 +42,7 @@ import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
  * @author Andrei Zaiats
  * @since 0.1.0
  */
-public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmViewModel> {
+abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmViewModel> {
 
     private static final String BINDING_VARIABLE_ERROR_TEXT = "Binding variable wasn't set successfully. "
             + "Probably viewModelVariableName of your BindingConfig doesn't match any variable in %s.";
@@ -116,7 +116,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
     @NonNull
     protected abstract T createDataBinding(@LayoutRes int layoutResource);
 
-    protected S initViewModel() {
+    S initViewModel() {
         S viewModel = getCachedViewModel();
         if (viewModel == null) {
             viewModel = callback.createViewModel();
@@ -126,7 +126,7 @@ public abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmView
         return viewModel;
     }
 
-    protected T initBinding(BindingConfig bindingConfig) {
+    T initBinding(BindingConfig bindingConfig) {
         T binding = createDataBinding(bindingConfig.getLayoutResource());
         if (!binding.setVariable(bindingConfig.getViewModelVariableName(), this.viewModel)) {
             throw new IllegalArgumentException(

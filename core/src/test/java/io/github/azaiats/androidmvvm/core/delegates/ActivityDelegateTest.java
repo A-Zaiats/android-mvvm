@@ -26,7 +26,6 @@ import org.mockito.MockitoAnnotations;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.utils.ReflectionUtils;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
@@ -63,7 +62,7 @@ public class ActivityDelegateTest {
 
     @Test
     public void testDestroyViewModelWhenInBackStack() {
-        setViewModel();
+        activityDelegate.viewModel = viewModel;
         when(activity.isChangingConfigurations()).thenReturn(false);
         activityDelegate.onRetainCustomNonConfigurationInstance();
         verify(viewModel).onDestroy();
@@ -71,22 +70,29 @@ public class ActivityDelegateTest {
 
     @Test
     public void testNotDestroyViewModelOnConfigurationChange() {
-        setViewModel();
+        activityDelegate.viewModel = viewModel;
         when(activity.isChangingConfigurations()).thenReturn(true);
         activityDelegate.onRetainCustomNonConfigurationInstance();
         verify(viewModel, never()).onDestroy();
     }
 
     @Test
+    public void testNoNullPointerOnDestroyViewModelIfAlreadyRemoved() {
+        when(activity.isChangingConfigurations()).thenReturn(true);
+        assertNull(activityDelegate.viewModel);
+        activityDelegate.onDestroy();
+    }
+
+    @Test
     public void testNotCacheViewModelWhenInBackStack() {
-        setViewModel();
+        activityDelegate.viewModel = viewModel;
         when(activity.isChangingConfigurations()).thenReturn(false);
         assertNull(activityDelegate.onRetainCustomNonConfigurationInstance());
     }
 
     @Test
     public void testCacheViewModelOnConfigurationChange() {
-        setViewModel();
+        activityDelegate.viewModel = viewModel;
         when(activity.isChangingConfigurations()).thenReturn(true);
         activityDelegate.onRetainCustomNonConfigurationInstance();
         assertSame(viewModel, activityDelegate.onRetainCustomNonConfigurationInstance());
@@ -105,7 +111,4 @@ public class ActivityDelegateTest {
         assertSame(activityDelegate.getCachedViewModel(), viewModel);
     }
 
-    private void setViewModel() {
-        ReflectionUtils.setParentField(activityDelegate, "viewModel", viewModel);
-    }
 }
