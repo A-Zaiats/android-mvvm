@@ -68,7 +68,7 @@ abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmViewModel> 
      */
     @CallSuper
     public void onCreate() {
-        final MvvmView<T, S> view = callback.getView();
+        final MvvmView<T, S> view = callback.getMvvmView();
         final BindingConfig bindingConfig = view.getBindingConfig();
         final S viewModel = initViewModel();
         final T binding = initBinding(bindingConfig);

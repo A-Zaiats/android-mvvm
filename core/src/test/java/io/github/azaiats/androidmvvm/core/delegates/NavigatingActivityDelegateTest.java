@@ -64,7 +64,7 @@ public class NavigatingActivityDelegateTest {
 
     @Test
     public void testSetNavigatorOnCreate() {
-        when(callback.getView()).thenReturn(view);
+        when(callback.getMvvmView()).thenReturn(view);
         when(callback.createViewModel()).thenReturn(viewModel);
         when(view.getBindingConfig()).thenReturn(new BindingConfig(0));
         delegate.onCreate();

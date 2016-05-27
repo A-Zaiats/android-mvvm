@@ -84,7 +84,7 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
 
     @NonNull
     @Override
-    public MvvmView<T, S> getView() {
+    public MvvmView<T, S> getMvvmView() {
         return this;
     }
 

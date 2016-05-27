@@ -17,36 +17,20 @@
 package io.github.azaiats.androidmvvm.core.delegates;
 
 import android.databinding.ViewDataBinding;
-import android.support.annotation.NonNull;
 
-import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
 
 /**
- * The base callback for Activity/Fragment delegates.
+ * The MvvmDelegate callback for fragment.
  * <p>
- * The base delegate callback functionality. Don't use it by your own.
+ * This callback will be called from {@link FragmentDelegate}.
+ * It must be implemented by all Fragments that you want to support library's mvvm.
  *
  * @param <T> the type of {@link ViewDataBinding}
  * @param <S> the type of binded {@link MvvmViewModel}
  * @author Andrei Zaiats
- * @since 0.1.0
+ * @since 0.2.0
  */
-interface DelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel> {
-
-    /**
-     * Getter for processed view.
-     *
-     * @return the processed {@link MvvmView}
-     */
-    @NonNull
-    MvvmView<T, S> getMvvmView();
-
-    /**
-     * Create a ViewModel instance.
-     *
-     * @return the {@link MvvmViewModel} for the view
-     */
-    @NonNull
-    S createViewModel();
+public interface FragmentDelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel>
+        extends DelegateCallback<T, S> {
 }

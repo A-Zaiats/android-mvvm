@@ -36,7 +36,7 @@ public class MvvmDelegateTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        when(callback.getView()).thenReturn(view);
+        when(callback.getMvvmView()).thenReturn(view);
         when(view.getBindingConfig()).thenReturn(new BindingConfig(0));
     }
 
