@@ -13,6 +13,11 @@ public class MainViewModel extends NavigatingViewModel<MainNavigator> {
     private String name;
     private final AppPreferences preferences;
 
+    /**
+     * Create MainViewModel with preferences
+     *
+     * @param preferences the AppPreferences
+     */
     public MainViewModel(AppPreferences preferences) {
         this.preferences = preferences;
     }

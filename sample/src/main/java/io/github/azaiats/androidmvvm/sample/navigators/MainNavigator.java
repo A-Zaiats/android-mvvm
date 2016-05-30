@@ -21,6 +21,12 @@ public class MainNavigator implements Navigator, OnNavigationItemSelectedListene
     private final FragmentActivity activity;
     private final DrawerLayout drawer;
 
+    /**
+     * Create MainNavigator
+     *
+     * @param activity the activity that contains fragments container
+     * @param drawer the drawer contains {@link android.support.design.widget.NavigationView}
+     */
     public MainNavigator(FragmentActivity activity, DrawerLayout drawer) {
         this.activity = activity;
         this.drawer = drawer;

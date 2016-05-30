@@ -17,6 +17,10 @@ import io.github.azaiats.androidmvvm.sample.navigators.MainNavigator;
 import io.github.azaiats.androidmvvm.sample.utils.AppPreferences;
 import io.github.azaiats.androidmvvm.sample.viewmodels.MainViewModel;
 
+/**
+ * @author Andrei Zaiats
+ * @since 05/12/2016
+ */
 public class MainActivity extends NavigatingMvvmActivity<MainNavigator, ActivityMainBinding, MainViewModel> {
 
     @Override

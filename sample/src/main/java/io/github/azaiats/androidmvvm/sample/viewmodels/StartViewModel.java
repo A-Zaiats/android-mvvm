@@ -18,6 +18,11 @@ public class StartViewModel extends NavigatingViewModel<StartNavigator> {
     private String name;
     private final AppPreferences preferences;
 
+    /**
+     * Create StartViewModel with preferences
+     *
+     * @param preferences the AppPreferences
+     */
     public StartViewModel(AppPreferences preferences) {
         this.preferences = preferences;
     }
