@@ -17,6 +17,7 @@
 package io.github.azaiats.androidmvvm.core;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,8 +26,12 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
+import io.github.azaiats.androidmvvm.core.common.BindingConfig;
+import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
 import io.github.azaiats.androidmvvm.core.mocks.TestMvvmFragment;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -70,5 +75,42 @@ public class MvvmFragmentTest {
         final Bundle testBundle = new Bundle();
         fragment.onSaveInstanceState(testBundle);
         verify(fragment.getMvvmDelegate()).onSaveInstanceState(testBundle);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testNotAllowUseBindingBeforeCreation() {
+        getTestedFragment().getBinding();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testNotAllowUseViewModelBeforeCreation() {
+        getTestedFragment().getViewModel();
+    }
+
+    @Test
+    public void testCreateDelegateIfNotExists() {
+        assertNotNull(getTestedFragment().getMvvmDelegate());
+    }
+
+    @Test
+    public void testReturnSameDelegate() {
+        final MvvmFragment testedFragment = getTestedFragment();
+        assertSame(testedFragment.getMvvmDelegate(), testedFragment.getMvvmDelegate());
+    }
+
+    private MvvmFragment getTestedFragment() {
+        return new MvvmFragment() {
+            @NonNull
+            @Override
+            public MvvmViewModel createViewModel() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public BindingConfig getBindingConfig() {
+                return null;
+            }
+        };
     }
 }
