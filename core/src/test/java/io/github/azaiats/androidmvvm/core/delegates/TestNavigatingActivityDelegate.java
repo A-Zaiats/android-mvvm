@@ -30,11 +30,13 @@ public class TestNavigatingActivityDelegate extends NavigatingActivityDelegate {
      * Create delegate for activity.
      *
      * @param callback          the ActivityDelegateCallback for this delegate
+     * @param navigatingCallback the NavigatingDelegateCallback for this delegate
      * @param delegatedActivity the Activity for delegation
      */
-    public TestNavigatingActivityDelegate(@NonNull NavigatingActivityDelegateCallback callback,
+    public TestNavigatingActivityDelegate(@NonNull ActivityDelegateCallback callback,
+                                          @NonNull NavigatingDelegateCallback navigatingCallback,
                                           @NonNull Activity delegatedActivity) {
-        super(callback, delegatedActivity);
+        super(callback, navigatingCallback, delegatedActivity);
     }
 
     // DataBindingUtils can't be mocked

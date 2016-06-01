@@ -16,29 +16,24 @@
 
 package io.github.azaiats.androidmvvm.core.delegates;
 
-import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.core.common.Navigator;
 
 /**
- * The callback for navigated activity
+ * The base callback for Activity/Fragment delegates with navigation support.
  *
  * @param <T> the type of {@link Navigator}
- * @param <S> the type of {@link ViewDataBinding}
- * @param <U> the type of binded {@link NavigatingViewModel}
  * @author Andrei Zaiats
- * @since 0.1.1
+ * @since 0.2.0
  */
-public interface NavigatingActivityDelegateCallback<T extends Navigator, S extends ViewDataBinding,
-        U extends NavigatingViewModel<T>>
-        extends ActivityDelegateCallback<S, U> {
+public interface NavigatingDelegateCallback<T extends Navigator> {
 
     /**
      * Getter for Navigator
      *
      * @return concrete Navigator instance
      */
-    @NonNull T getNavigator();
+    @NonNull
+    T getNavigator();
 }

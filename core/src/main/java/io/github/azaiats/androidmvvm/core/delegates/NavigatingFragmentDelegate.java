@@ -16,39 +16,39 @@
 
 package io.github.azaiats.androidmvvm.core.delegates;
 
-import android.app.Activity;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 
 import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.core.common.Navigator;
 
 /**
- * A navigated delegate for Activities lifecycle.
+ * A navigated delegate for Fragments lifecycle.
  *
  * @param <T> the type of {@link Navigator}
  * @param <S> the type of {@link ViewDataBinding}
  * @param <U> the type of binded {@link NavigatingViewModel}
  * @author Andrei Zaiats
- * @since 0.1.1
+ * @since 0.2.0
  */
-public class NavigatingActivityDelegate<T extends Navigator, S extends ViewDataBinding,
-        U extends NavigatingViewModel<T>> extends ActivityDelegate<S, U> {
+public class NavigatingFragmentDelegate<T extends Navigator, S extends ViewDataBinding,
+        U extends NavigatingViewModel<T>> extends FragmentDelegate<S, U> {
 
     private final NavigatingDelegateCallback<T> navigatingCallback;
 
     /**
-     * Create delegate for activity.
+     * Create a navigated delegate for fragment.
      *
-     * @param callback           the {@link ActivityDelegateCallback} for this delegate
+     * @param callback          the {@link DelegateCallback} for this delegate
      * @param navigatingCallback the {@link NavigatingDelegateCallback} for this delegate
-     * @param delegatedActivity  the {@link Activity} for delegation
+     * @param delegatedFragment {@link Fragment} for delegation
      */
-    public NavigatingActivityDelegate(@NonNull ActivityDelegateCallback<S, U> callback,
+    public NavigatingFragmentDelegate(@NonNull DelegateCallback<S, U> callback,
                                       @NonNull NavigatingDelegateCallback<T> navigatingCallback,
-                                      @NonNull Activity delegatedActivity) {
-        super(callback, delegatedActivity);
+                                      @NonNull Fragment delegatedFragment) {
+        super(callback, delegatedFragment);
         this.navigatingCallback = navigatingCallback;
     }
 

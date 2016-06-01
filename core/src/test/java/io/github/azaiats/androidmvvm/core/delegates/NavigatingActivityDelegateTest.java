@@ -42,7 +42,10 @@ public class NavigatingActivityDelegateTest {
     private Navigator navigator;
 
     @Mock
-    private NavigatingActivityDelegateCallback callback;
+    private ActivityDelegateCallback callback;
+
+    @Mock
+    private NavigatingDelegateCallback navigatingCallback;
 
     @Mock
     private NavigatingViewModel<Navigator> viewModel;
@@ -59,7 +62,7 @@ public class NavigatingActivityDelegateTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        when(callback.getNavigator()).thenReturn(navigator);
+        when(navigatingCallback.getNavigator()).thenReturn(navigator);
     }
 
     @Test
