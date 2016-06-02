@@ -17,6 +17,7 @@
 package io.github.azaiats.androidmvvm.core;
 
 import android.databinding.Observable;
+import android.support.annotation.NonNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +27,12 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
 
+import io.github.azaiats.androidmvvm.core.common.BindingConfig;
+import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
 import io.github.azaiats.androidmvvm.core.mocks.TestMvvmActivity;
 
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -114,5 +119,32 @@ public class MvvmActivityTest {
         activity.onDestroy();
         verify(activity.getViewModel()).removeOnPropertyChangedCallback(firstCallback);
         verify(activity.getViewModel()).removeOnPropertyChangedCallback(secondCallback);
+    }
+
+    @Test
+    public void testCreateDelegateIfNotExists() {
+        assertNotNull(getTestedActivity().getMvvmDelegate());
+    }
+
+    @Test
+    public void testReturnsSameDelegate() {
+        final MvvmActivity testedActivity = getTestedActivity();
+        assertSame(testedActivity.getMvvmDelegate(), testedActivity.getMvvmDelegate());
+    }
+
+    private MvvmActivity getTestedActivity() {
+        return new MvvmActivity() {
+            @NonNull
+            @Override
+            public MvvmViewModel createViewModel() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public BindingConfig getBindingConfig() {
+                return null;
+            }
+        };
     }
 }

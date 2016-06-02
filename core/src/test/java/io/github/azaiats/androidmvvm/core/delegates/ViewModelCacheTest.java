@@ -16,6 +16,8 @@
 
 package io.github.azaiats.androidmvvm.core.delegates;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import org.junit.Before;
@@ -27,8 +29,10 @@ import org.robolectric.annotation.Config;
 
 import io.github.azaiats.androidmvvm.core.BuildConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
+import io.github.azaiats.androidmvvm.core.utils.ReflectionUtils;
 
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
@@ -88,5 +92,36 @@ public class ViewModelCacheTest {
         cache.removeViewModel(key, testActivity);
 
         assertNull(cache.getViewModel(key, testActivity));
+    }
+
+    @Test
+    public void testRemoveCacheFragmentOnCleanup() {
+        cache.getViewModel(1, testActivity);
+        assertNotNull(getCacheFragment(cache));
+        cache.cleanUp();
+        assertNull(getCacheFragment(cache));
+    }
+
+    @Test
+    public void testReuseRetainedFragment() {
+        cache.getViewModel(1, testActivity);
+        final Fragment oldFragment = getCacheFragment(cache);
+
+        cache.cleanUp();
+        cache = new ViewModelCache();
+        cache.getViewModel(1, testActivity);
+        final Fragment newFragment = getCacheFragment(cache);
+
+        assertSame(oldFragment, newFragment);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testFailIfContextNotContainsFragmentActivity() {
+        Activity activity = Robolectric.buildActivity(Activity.class).create().get();
+        cache.getViewModel(1, activity);
+    }
+
+    private Fragment getCacheFragment(ViewModelCache cache) {
+        return (Fragment) ReflectionUtils.getPrivateField(cache, "cacheFragment");
     }
 }

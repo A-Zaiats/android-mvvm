@@ -16,6 +16,7 @@
 
 package io.github.azaiats.androidmvvm.core;
 
+import android.databinding.Observable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -32,6 +33,7 @@ import io.github.azaiats.androidmvvm.core.mocks.TestMvvmDialogFragment;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -96,6 +98,33 @@ public class MvvmDialogFragmentTest {
     public void testReturnSameDelegate() {
         final MvvmDialogFragment testedFragment = getTestedFragment();
         assertSame(testedFragment.getMvvmDelegate(), testedFragment.getMvvmDelegate());
+    }
+
+    @Test
+    public void testOnPropertyChangedCallbacksAddedToViewModel() {
+        final Observable.OnPropertyChangedCallback firstCallback = mock(Observable.OnPropertyChangedCallback.class);
+        final Observable.OnPropertyChangedCallback secondCallback = mock(Observable.OnPropertyChangedCallback.class);
+        fragment.setViewModel(fragment.createViewModel());
+
+        fragment.addOnPropertyChangedCallback(firstCallback);
+        fragment.addOnPropertyChangedCallback(secondCallback);
+
+        verify(fragment.getViewModel()).addOnPropertyChangedCallback(firstCallback);
+        verify(fragment.getViewModel()).addOnPropertyChangedCallback(secondCallback);
+    }
+
+    @Test
+    public void testRemoveOnPropertyChangedCallbacksOnActivityDestroy() {
+        final Observable.OnPropertyChangedCallback firstCallback = mock(Observable.OnPropertyChangedCallback.class);
+        final Observable.OnPropertyChangedCallback secondCallback = mock(Observable.OnPropertyChangedCallback.class);
+        fragment.setViewModel(fragment.createViewModel());
+        fragment.addOnPropertyChangedCallback(firstCallback);
+        fragment.addOnPropertyChangedCallback(secondCallback);
+
+        SupportFragmentTestUtil.startFragment(fragment);
+        fragment.onDestroy();
+        verify(fragment.getViewModel()).removeOnPropertyChangedCallback(firstCallback);
+        verify(fragment.getViewModel()).removeOnPropertyChangedCallback(secondCallback);
     }
 
     private MvvmDialogFragment getTestedFragment() {

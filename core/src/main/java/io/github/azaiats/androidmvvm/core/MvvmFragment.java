@@ -16,6 +16,7 @@
 
 package io.github.azaiats.androidmvvm.core;
 
+import android.databinding.Observable;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -25,6 +26,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
@@ -42,6 +46,7 @@ import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegateCallback;
 public abstract class MvvmFragment<T extends ViewDataBinding, S extends MvvmViewModel> extends Fragment
         implements MvvmView<T, S>, FragmentDelegateCallback<T, S> {
 
+    private List<Observable.OnPropertyChangedCallback> onPropertyChangedCallbacks = new ArrayList<>();
     private FragmentDelegate<T, S> delegate;
     private T binding;
     private S viewModel;
@@ -78,8 +83,9 @@ public abstract class MvvmFragment<T extends ViewDataBinding, S extends MvvmView
     @Override
     @CallSuper
     public void onDestroy() {
-        super.onDestroy();
+        removeOnPropertyChangedCallbacks();
         getMvvmDelegate().onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -134,6 +140,19 @@ public abstract class MvvmFragment<T extends ViewDataBinding, S extends MvvmView
     }
 
     /**
+     * Add an Observable.OnPropertyChangedCallback to ViewModel that will be removed on View destroy
+     * <p>
+     * Use this method to add Observable.OnPropertyChangedCallback to ViewModel. All callbacks will be removed on
+     * View destroy. It helps avoid memory leaks via callbacks.
+     *
+     * @param callback the callback to start listening
+     */
+    protected void addOnPropertyChangedCallback(Observable.OnPropertyChangedCallback callback) {
+        onPropertyChangedCallbacks.add(callback);
+        getViewModel().addOnPropertyChangedCallback(callback);
+    }
+
+    /**
      * Create delegate for the current fragment if not exists.
      *
      * @return the {@link FragmentDelegate} for current fragment
@@ -145,4 +164,9 @@ public abstract class MvvmFragment<T extends ViewDataBinding, S extends MvvmView
         return delegate;
     }
 
+    private void removeOnPropertyChangedCallbacks() {
+        for (Observable.OnPropertyChangedCallback callback : onPropertyChangedCallbacks) {
+            getViewModel().removeOnPropertyChangedCallback(callback);
+        }
+    }
 }
