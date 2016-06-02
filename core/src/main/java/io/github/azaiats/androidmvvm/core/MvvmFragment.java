@@ -22,42 +22,67 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
-import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegateCallback;
+import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegate;
+import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegateCallback;
 
 /**
- * Base Activity class that uses DataBinding and implements Model-View-ViewModel architecture.
+ * Base Fragment class that uses DataBinding and implements Model-View-ViewModel architecture.
  *
  * @param <T> the type of {@link ViewDataBinding}
  * @param <S> the type of binded {@link MvvmViewModel}
  * @author Andrei Zaiats
- * @since 0.1.0
+ * @since 0.2.0
  */
-public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmViewModel> extends AppCompatActivity
-        implements MvvmView<T, S>, ActivityDelegateCallback<T, S> {
+public abstract class MvvmFragment<T extends ViewDataBinding, S extends MvvmViewModel> extends Fragment
+        implements MvvmView<T, S>, FragmentDelegateCallback<T, S> {
 
     private List<Observable.OnPropertyChangedCallback> onPropertyChangedCallbacks = new ArrayList<>();
-    private ActivityDelegate<T, S> delegate;
+    private FragmentDelegate<T, S> delegate;
     private T binding;
     private S viewModel;
 
     @Override
     @CallSuper
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getMvvmDelegate().onCreate();
+        getMvvmDelegate().onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return binding.getRoot();
     }
 
     @Override
     @CallSuper
-    protected void onDestroy() {
+    public void onResume() {
+        super.onResume();
+        getMvvmDelegate().onResume();
+    }
+
+    @Override
+    @CallSuper
+    public void onPause() {
+        getMvvmDelegate().onPause();
+        super.onPause();
+    }
+
+    @Override
+    @CallSuper
+    public void onDestroy() {
         removeOnPropertyChangedCallbacks();
         getMvvmDelegate().onDestroy();
         super.onDestroy();
@@ -65,21 +90,9 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
 
     @Override
     @CallSuper
-    protected void onPause() {
-        getMvvmDelegate().onPause();
-        super.onPause();
-    }
-
-    @Override
-    @CallSuper
-    protected void onResume() {
-        super.onResume();
-        getMvvmDelegate().onResume();
-    }
-
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return getMvvmDelegate().onRetainCustomNonConfigurationInstance();
+    public void onSaveInstanceState(Bundle outState) {
+        getMvvmDelegate().onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @NonNull
@@ -96,7 +109,7 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
     @NonNull
     public T getBinding() {
         if (binding == null) {
-            throw new IllegalStateException("You can't call getBinding() before activity creating.");
+            throw new IllegalStateException("You can't call getBinding() before fragment creating.");
         }
         return binding;
     }
@@ -115,7 +128,7 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
     @NonNull
     public S getViewModel() {
         if (viewModel == null) {
-            throw new IllegalStateException("You can't call getViewModel() before activity creating.");
+            throw new IllegalStateException("You can't call getViewModel() before fragment creating.");
         }
         return viewModel;
     }
@@ -140,14 +153,13 @@ public abstract class MvvmActivity<T extends ViewDataBinding, S extends MvvmView
     }
 
     /**
-     * Create delegate for the current activity.
+     * Create delegate for the current fragment if not exists.
      *
-     * @return the {@link ActivityDelegate} for current activity
+     * @return the {@link FragmentDelegate} for current fragment
      */
-    @NonNull
-    protected ActivityDelegate<T, S> getMvvmDelegate() {
+    protected FragmentDelegate getMvvmDelegate() {
         if (delegate == null) {
-            delegate = new ActivityDelegate<>(this, this);
+            delegate = new FragmentDelegate<>(this, this);
         }
         return delegate;
     }

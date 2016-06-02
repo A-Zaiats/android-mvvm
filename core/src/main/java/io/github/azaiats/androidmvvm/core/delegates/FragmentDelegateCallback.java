@@ -17,31 +17,20 @@
 package io.github.azaiats.androidmvvm.core.delegates;
 
 import android.databinding.ViewDataBinding;
-import android.support.annotation.Nullable;
 
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
 
 /**
- * The MvvmDelegate callback for activity.
+ * The MvvmDelegate callback for fragment.
  * <p>
- * This callback will be called from {@link ActivityDelegate}.
- * It must be implemented by all Activities that you want to support library's mvvm.
+ * This callback will be called from {@link FragmentDelegate}.
+ * It must be implemented by all Fragments that you want to support library's mvvm.
  *
  * @param <T> the type of {@link ViewDataBinding}
  * @param <S> the type of binded {@link MvvmViewModel}
  * @author Andrei Zaiats
- * @see io.github.azaiats.androidmvvm.core.MvvmActivity for example of implementation.
- * @since 0.1.0
+ * @since 0.2.0
  */
-public interface ActivityDelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel>
+public interface FragmentDelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel>
         extends DelegateCallback<T, S> {
-
-    /**
-     * This method should invoke {@link android.support.v4.app.FragmentActivity#getLastCustomNonConfigurationInstance()}
-     *
-     * @return the value previously returned from
-     * {@link android.support.v4.app.FragmentActivity#onRetainCustomNonConfigurationInstance()}
-     */
-    @Nullable
-    Object getLastCustomNonConfigurationInstance();
 }

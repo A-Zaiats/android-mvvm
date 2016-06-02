@@ -3,5 +3,12 @@
     <string name="hello">Hello!</string>
     <string name="hello_name">Hello, %s!</string>
     <string name="clear_name_button">Clear name</string>
+    <string name="start_app_button">Start app</string>
     <string name="hint_enter_name">Enter your name</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="user_email">%s@example.com</string>
 </resources>

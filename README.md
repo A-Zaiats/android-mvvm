@@ -1,8 +1,8 @@
 # android-mvvm
 A Model-View-ViewModel library for Android apps
 
-[![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=master)](https://travis-ci.org/A-Zaiats/android-mvvm)
-[![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg)](https://codecov.io/gh/A-Zaiats/android-mvvm)
+[![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=v0.2)](https://travis-ci.org/A-Zaiats/android-mvvm)
+[![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg?branch=v0.2)](https://codecov.io/gh/A-Zaiats/android-mvvm)
 [ ![Download](https://api.bintray.com/packages/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/images/download.svg) ](https://bintray.com/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/_latestVersion)
 
 ## Features
@@ -10,6 +10,28 @@ This library helps reduce boilerplate code in android applications:
 - a useful implementation of Model-View-ViewModel pattern by leveraging the new Android Data Binding.
 - automating bind ViewModel with view.
 - ViewModel is isolated from Activity/Fragment lifecycle. It's particularly good at surviving configuration changes when Android destroys your Activity and Views and replaces them with new ones.
+
+## Installation
+
+    repositories {
+        maven { url "https://dl.bintray.com/a-zaiats/maven" }
+    }
+
+    dependencies {
+        compile 'io.github.azaiats.androidmvvm:core:0.1.2'
+    }
+
+Don't forget to **enable Data Binding** in your module:
+
+    android {
+        dataBinding {
+            enabled = true;
+        }
+    }
+
+
+## Changelog
+The changelog can be found in the [release section](https://github.com/A-Zaiats/android-mvvm/releases)
 
 ## Contributors
 - Andrei Zaiats (andrei.zaiats@gmail.com)

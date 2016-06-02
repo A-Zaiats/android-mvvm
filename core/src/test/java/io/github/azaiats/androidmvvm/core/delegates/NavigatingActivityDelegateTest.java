@@ -28,9 +28,8 @@ import io.github.azaiats.androidmvvm.core.common.BindingConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
 import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.core.common.Navigator;
-import io.github.azaiats.androidmvvm.core.mocks.TestNavigatingActivityDelegate;
-import io.github.azaiats.androidmvvm.core.utils.ReflectionUtils;
 
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,7 +42,10 @@ public class NavigatingActivityDelegateTest {
     private Navigator navigator;
 
     @Mock
-    private NavigatingActivityDelegateCallback callback;
+    private ActivityDelegateCallback callback;
+
+    @Mock
+    private NavigatingDelegateCallback navigatingCallback;
 
     @Mock
     private NavigatingViewModel<Navigator> viewModel;
@@ -60,12 +62,12 @@ public class NavigatingActivityDelegateTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        when(callback.getNavigator()).thenReturn(navigator);
+        when(navigatingCallback.getNavigator()).thenReturn(navigator);
     }
 
     @Test
     public void testSetNavigatorOnCreate() {
-        when(callback.getView()).thenReturn(view);
+        when(callback.getMvvmView()).thenReturn(view);
         when(callback.createViewModel()).thenReturn(viewModel);
         when(view.getBindingConfig()).thenReturn(new BindingConfig(0));
         delegate.onCreate();
@@ -74,9 +76,14 @@ public class NavigatingActivityDelegateTest {
 
     @Test
     public void testRemoveNavigatorOnDestroy() {
-        ReflectionUtils.setParentField(delegate, "viewModel", viewModel);
+        delegate.viewModel = viewModel;
         delegate.onDestroy();
         verify(viewModel).setNavigator(null);
     }
 
+    @Test
+    public void testNoNullPointerOnNavigatorDeleteIfViewModelRemoved() {
+        assertNull(delegate.viewModel);
+        delegate.onDestroy();
+    }
 }

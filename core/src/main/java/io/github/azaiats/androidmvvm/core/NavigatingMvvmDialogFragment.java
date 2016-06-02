@@ -17,35 +17,33 @@
 package io.github.azaiats.androidmvvm.core;
 
 import android.databinding.ViewDataBinding;
-import android.support.annotation.NonNull;
 
 import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.core.common.Navigator;
-import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
-import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegateCallback;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingActivityDelegate;
+import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegate;
+import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegateCallback;
 import io.github.azaiats.androidmvvm.core.delegates.NavigatingDelegateCallback;
+import io.github.azaiats.androidmvvm.core.delegates.NavigatingFragmentDelegate;
 
 /**
- * MvvmActivity that supports Navigator
+ * MvvmDialogFragment that supports Navigator
  *
  * @param <T> the type of {@link Navigator}
  * @param <S> the type of {@link ViewDataBinding}
  * @param <U> the type of binded {@link NavigatingViewModel}
  * @author Andrei Zaiats
- * @since 0.1.1
+ * @since 0.2.0
  */
-public abstract class NavigatingMvvmActivity<T extends Navigator, S extends ViewDataBinding,
+public abstract class NavigatingMvvmDialogFragment<T extends Navigator, S extends ViewDataBinding,
         U extends NavigatingViewModel<T>>
-        extends MvvmActivity<S, U> implements ActivityDelegateCallback<S, U>, NavigatingDelegateCallback<T> {
+        extends MvvmDialogFragment<S, U> implements FragmentDelegateCallback<S, U>, NavigatingDelegateCallback<T> {
 
-    private NavigatingActivityDelegate<T, S, U> delegate;
+    private NavigatingFragmentDelegate<T, S, U> delegate;
 
-    @NonNull
     @Override
-    protected ActivityDelegate<S, U> getMvvmDelegate() {
+    protected FragmentDelegate getMvvmDelegate() {
         if (delegate == null) {
-            delegate = new NavigatingActivityDelegate<>(this, this, this);
+            delegate = new NavigatingFragmentDelegate<>(this, this, this);
         }
         return delegate;
     }

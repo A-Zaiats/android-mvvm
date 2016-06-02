@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.delegates.internal;
+package io.github.azaiats.androidmvvm.core.delegates;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
@@ -32,7 +32,7 @@ import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
  * @author Andrei Zaiats
  * @since 0.1.0
  */
-public interface DelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel> {
+interface DelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel> {
 
     /**
      * Getter for processed view.
@@ -40,7 +40,7 @@ public interface DelegateCallback<T extends ViewDataBinding, S extends MvvmViewM
      * @return the processed {@link MvvmView}
      */
     @NonNull
-    MvvmView<T, S> getView();
+    MvvmView<T, S> getMvvmView();
 
     /**
      * Create a ViewModel instance.

@@ -1,43 +1,34 @@
 package io.github.azaiats.androidmvvm.sample.viewmodels;
 
-import android.databinding.Bindable;
-import android.text.TextUtils;
-import android.view.View;
-
-import io.github.azaiats.androidmvvm.BR;
-import io.github.azaiats.androidmvvm.core.common.BaseViewModel;
+import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.sample.navigators.MainNavigator;
+import io.github.azaiats.androidmvvm.sample.utils.AppPreferences;
 
 /**
  * @author Andrei Zaiats
- * @since 05/12/2016
+ * @since 05/26/2016
  */
-public class MainViewModel extends BaseViewModel {
+public class MainViewModel extends NavigatingViewModel<MainNavigator> {
 
     private String name;
+    private final AppPreferences preferences;
 
-    @Bindable
+    /**
+     * Create MainViewModel with preferences
+     *
+     * @param preferences the AppPreferences
+     */
+    public MainViewModel(AppPreferences preferences) {
+        this.preferences = preferences;
+    }
+
     public String getName() {
         return name;
     }
 
-    /**
-     * Setter for name.
-     *
-     * @param name an entered name
-     */
-    public void setName(String name) {
-        if (TextUtils.equals(this.name, name)) return;
-
-        this.name = name;
-        notifyPropertyChanged(BR.name);
-    }
-
-    /**
-     * Clear current name.
-     *
-     * @param view an interacted view
-     */
-    public void onNameClear(View view) {
-        setName(null);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        name = preferences.getName();
     }
 }

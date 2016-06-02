@@ -26,6 +26,7 @@ import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
 import io.github.azaiats.androidmvvm.core.delegates.NavigatingActivityDelegate;
 import io.github.azaiats.androidmvvm.core.mocks.TestNavigatingMvvmActivity;
 
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -40,5 +41,13 @@ public class NavigatingMvvmActivityTest {
         final NavigatingMvvmActivity activity = Robolectric.buildActivity(TestNavigatingMvvmActivity.class).get();
         final ActivityDelegate mvvmDelegate = activity.getMvvmDelegate();
         assertTrue(mvvmDelegate instanceof NavigatingActivityDelegate);
+    }
+
+    @Test
+    public void testCreateNewDelegateOnceOnly() {
+        final NavigatingMvvmActivity activity = Robolectric.buildActivity(TestNavigatingMvvmActivity.class).get();
+        final ActivityDelegate firstDelegate = activity.getMvvmDelegate();
+        final ActivityDelegate secondDelegate = activity.getMvvmDelegate();
+        assertSame(firstDelegate, secondDelegate);
     }
 }

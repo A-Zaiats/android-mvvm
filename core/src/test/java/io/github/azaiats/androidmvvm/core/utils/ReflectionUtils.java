@@ -44,6 +44,25 @@ public final class ReflectionUtils {
     }
 
     /**
+     * Get private field from object
+     *
+     * @param instance  the target object
+     * @param fieldName name of field
+     * @return field value
+     */
+    public static Object getPrivateField(Object instance, String fieldName) {
+        try {
+            final Field field = instance.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(instance);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Inject value to inherited field
      *
      * @param instance  the target of injection
