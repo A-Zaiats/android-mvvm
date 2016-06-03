@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.mocks;
+package io.github.azaiats.androidmvvm.navigation.mocks;
 
 import android.support.annotation.NonNull;
 
-import io.github.azaiats.androidmvvm.core.NavigatingMvvmActivity;
 import io.github.azaiats.androidmvvm.core.common.BindingConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.navigation.NavigatingMvvmActivity;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
 
 import static org.mockito.Mockito.mock;
 

@@ -9,10 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 
 import io.github.azaiats.androidmvvm.R;
-import io.github.azaiats.androidmvvm.core.NavigatingMvvmActivity;
 import io.github.azaiats.androidmvvm.core.common.BindingConfig;
 import io.github.azaiats.androidmvvm.databinding.ActivityMainBinding;
 import io.github.azaiats.androidmvvm.databinding.NavHeaderMainBinding;
+import io.github.azaiats.androidmvvm.navigation.NavigatingMvvmActivity;
 import io.github.azaiats.androidmvvm.sample.navigators.MainNavigator;
 import io.github.azaiats.androidmvvm.sample.utils.AppPreferences;
 import io.github.azaiats.androidmvvm.sample.viewmodels.MainViewModel;

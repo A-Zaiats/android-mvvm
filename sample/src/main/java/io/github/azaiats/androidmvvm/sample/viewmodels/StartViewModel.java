@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import io.github.azaiats.androidmvvm.BR;
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.sample.navigators.StartNavigator;
 import io.github.azaiats.androidmvvm.sample.utils.AppPreferences;
 

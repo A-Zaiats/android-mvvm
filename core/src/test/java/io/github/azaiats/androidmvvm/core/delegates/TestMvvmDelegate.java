@@ -71,7 +71,7 @@ public class TestMvvmDelegate extends MvvmDelegate {
 
     // DataBindingUtils can't be mocked
     @Override
-    ViewDataBinding initBinding(BindingConfig bindingConfig) {
+    protected ViewDataBinding initBinding(BindingConfig bindingConfig) {
         return null;
     }
 }

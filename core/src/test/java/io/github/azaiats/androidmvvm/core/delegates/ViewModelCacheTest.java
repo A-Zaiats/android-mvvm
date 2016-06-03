@@ -29,7 +29,7 @@ import org.robolectric.annotation.Config;
 
 import io.github.azaiats.androidmvvm.core.BuildConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.utils.ReflectionUtils;
+import io.github.azaiats.androidmvvm.testutils.ReflectionUtils;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;

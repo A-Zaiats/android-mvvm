@@ -3,7 +3,7 @@ package io.github.azaiats.androidmvvm.sample.navigators;
 import android.app.Activity;
 import android.content.Intent;
 
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
 import io.github.azaiats.androidmvvm.sample.activities.MainActivity;
 
 /**

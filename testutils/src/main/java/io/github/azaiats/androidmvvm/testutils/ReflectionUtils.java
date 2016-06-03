@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.utils;
+package io.github.azaiats.androidmvvm.testutils;
 
 import java.lang.reflect.Field;
 
@@ -53,11 +53,8 @@ public final class ReflectionUtils {
     public static Object getPrivateField(Object instance, String fieldName) {
         try {
             final Field field = instance.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return field.get(instance);
+            return getField(field, instance);
         } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
@@ -75,6 +72,27 @@ public final class ReflectionUtils {
             throw new RuntimeException(new NoSuchFieldException());
         }
         setField(field, instance, value);
+    }
+
+    /**
+     * Get field from object
+     *
+     * @param instance  the target object
+     * @param fieldName name of field
+     * @return field value
+     */
+    public static Object getParentField(Object instance, String fieldName) {
+        final Field field = getParentField(instance.getClass(), fieldName);
+        return getField(field, instance);
+    }
+
+    private static Object getField(Field field, Object instance) {
+        field.setAccessible(true);
+        try {
+            return field.get(instance);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void setField(Field field, Object instance, Object value) {

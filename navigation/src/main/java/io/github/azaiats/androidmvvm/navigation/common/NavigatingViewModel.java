@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.common;
+package io.github.azaiats.androidmvvm.navigation.common;
 
 import android.support.annotation.Nullable;
+
+import io.github.azaiats.androidmvvm.core.common.BaseViewModel;
 
 /**
  * ViewModel with navigation

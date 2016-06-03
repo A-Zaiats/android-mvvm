@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.navigation;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.core.MvvmActivity;
 import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
 import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegateCallback;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingActivityDelegate;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingDelegateCallback;
+import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
+import io.github.azaiats.androidmvvm.navigation.delegates.NavigatingActivityDelegate;
+import io.github.azaiats.androidmvvm.navigation.delegates.NavigatingDelegateCallback;
 
 /**
  * MvvmActivity that supports Navigator

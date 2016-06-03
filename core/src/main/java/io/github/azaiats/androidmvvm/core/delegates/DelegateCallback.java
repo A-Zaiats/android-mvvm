@@ -32,7 +32,7 @@ import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
  * @author Andrei Zaiats
  * @since 0.1.0
  */
-interface DelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel> {
+public interface DelegateCallback<T extends ViewDataBinding, S extends MvvmViewModel> {
 
     /**
      * Getter for processed view.

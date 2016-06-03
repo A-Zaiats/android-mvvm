@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    compile project(':core')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$rootProject.ext.support_version"
 
@@ -40,10 +41,10 @@ dependencies {
 
 publish {
     groupId = GROUP
-    artifactId = 'core'
+    artifactId = 'navigation'
     version = VERSION_NAME
-    uploadName = GROUP + ':core'
-    description = CORE_DESCRIPTION
+    uploadName = GROUP + ':navigation'
+    description = NAVIGATION_DESCRIPTION
     website = WEBSITE
     issueTracker = ISSUE_TRACKER
     repository = REPOSITORY

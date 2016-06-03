@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.navigation;
 
 import android.support.annotation.NonNull;
 
@@ -23,9 +23,9 @@ import org.junit.Test;
 
 import io.github.azaiats.androidmvvm.core.common.BindingConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
 import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegate;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingFragmentDelegate;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
+import io.github.azaiats.androidmvvm.navigation.delegates.NavigatingFragmentDelegate;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -33,13 +33,13 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Andrei Zaiats
  */
-public class NavigatingMvvmFragmentTest {
+public class NavigatingMvvmDialogFragmentTest {
 
-    private NavigatingMvvmFragment fragment;
+    private NavigatingMvvmDialogFragment fragment;
 
     @Before
     public void init() {
-        fragment = new NavigatingMvvmFragment() {
+        fragment = new NavigatingMvvmDialogFragment() {
             @NonNull
             @Override
             public MvvmViewModel createViewModel() {

@@ -1,8 +1,8 @@
 # android-mvvm
 A Model-View-ViewModel library for Android apps
 
-[![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=master)](https://travis-ci.org/A-Zaiats/android-mvvm)
-[![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg?branch=master)](https://codecov.io/gh/A-Zaiats/android-mvvm)
+[![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=navigation)](https://travis-ci.org/A-Zaiats/android-mvvm)
+[![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg?branch=navigation)](https://codecov.io/gh/A-Zaiats/android-mvvm)
 [ ![Download](https://api.bintray.com/packages/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/images/download.svg) ](https://bintray.com/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/_latestVersion)
 
 ## Features
