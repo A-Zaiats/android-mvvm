@@ -17,7 +17,8 @@ notifications:
 script: ./gradlew build check jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - ./gradlew bintrayUpload -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_KEY
+  - ./gradlew core:bintrayUpload -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_KEY
+  - ./gradlew navigation:bintrayUpload -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_KEY
 cache:
   directories:
   - "$HOME/.gradle"

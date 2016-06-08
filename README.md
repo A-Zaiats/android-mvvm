@@ -3,7 +3,7 @@ A Model-View-ViewModel library for Android apps
 
 [![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=master)](https://travis-ci.org/A-Zaiats/android-mvvm)
 [![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg?branch=master)](https://codecov.io/gh/A-Zaiats/android-mvvm)
-[ ![Download](https://api.bintray.com/packages/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/images/download.svg) ](https://bintray.com/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/a-zaiats/maven/io.github.azaiats.androidmvvm/images/download.svg) ](https://bintray.com/a-zaiats/maven/io.github.azaiats.androidmvvm%3Acore/_latestVersion)
 
 ## Features
 This library helps reduce boilerplate code in android applications:
@@ -18,8 +18,8 @@ This library helps reduce boilerplate code in android applications:
     }
 
     dependencies {
-        compile 'io.github.azaiats.androidmvvm:core:0.2.1'
-        compile 'io.github.azaiats.androidmvvm:navigation:0.2.1' // optional
+        compile 'io.github.azaiats.androidmvvm:androidmvvm-core:0.2.1'
+        compile 'io.github.azaiats.androidmvvm:androidmvvm-navigation:0.2.1' // optional
     }
 
 Don't forget to **enable Data Binding** in your module:

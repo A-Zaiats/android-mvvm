@@ -40,10 +40,10 @@ dependencies {
 
 publish {
     groupId = GROUP
-    artifactId = 'core'
+    artifactId = 'androidmvvm-core'
     version = VERSION_NAME
-    uploadName = GROUP + ':core'
-    description = CORE_DESCRIPTION
+    uploadName = GROUP
+    description = DESCRIPTION
     website = WEBSITE
     issueTracker = ISSUE_TRACKER
     repository = REPOSITORY

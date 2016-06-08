@@ -41,10 +41,10 @@ dependencies {
 
 publish {
     groupId = GROUP
-    artifactId = 'navigation'
+    artifactId = 'androidmvvm-navigation'
     version = VERSION_NAME
-    uploadName = GROUP + ':navigation'
-    description = NAVIGATION_DESCRIPTION
+    uploadName = GROUP
+    description = DESCRIPTION
     website = WEBSITE
     issueTracker = ISSUE_TRACKER
     repository = REPOSITORY
