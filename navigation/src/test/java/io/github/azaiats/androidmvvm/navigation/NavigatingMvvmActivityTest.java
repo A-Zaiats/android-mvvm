@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.navigation;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +23,8 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingActivityDelegate;
-import io.github.azaiats.androidmvvm.core.mocks.TestNavigatingMvvmActivity;
+import io.github.azaiats.androidmvvm.navigation.delegates.NavigatingActivityDelegate;
+import io.github.azaiats.androidmvvm.navigation.mocks.TestNavigatingMvvmActivity;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -33,7 +33,7 @@ import static org.junit.Assert.assertTrue;
  * @author Andrei Zaiats
  */
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(sdk = 21, constants = BuildConfig.class)
+@Config(sdk = 21, constants = io.github.azaiats.androidmvvm.core.BuildConfig.class)
 public class NavigatingMvvmActivityTest {
 
     @Test

@@ -116,7 +116,7 @@ abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmViewModel> 
     @NonNull
     protected abstract T createDataBinding(@LayoutRes int layoutResource);
 
-    S initViewModel() {
+    protected S initViewModel() {
         S viewModel = getCachedViewModel();
         if (viewModel == null) {
             viewModel = callback.createViewModel();
@@ -126,7 +126,7 @@ abstract class MvvmDelegate<T extends ViewDataBinding, S extends MvvmViewModel> 
         return viewModel;
     }
 
-    T initBinding(BindingConfig bindingConfig) {
+    protected T initBinding(BindingConfig bindingConfig) {
         T binding = createDataBinding(bindingConfig.getLayoutResource());
         if (!binding.setVariable(bindingConfig.getViewModelVariableName(), this.viewModel)) {
             throw new IllegalArgumentException(

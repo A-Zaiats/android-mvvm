@@ -14,30 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.common;
+package io.github.azaiats.androidmvvm.navigation.common;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 /**
- * ViewModel with navigation
- * <p>
- * ViewModel has no direct reference to context. So it can't starts new {@link android.app.Activity}
- * or replace {@link android.app.Fragment} via {@link android.app.FragmentManager}.
- * This work can be delegated to external navigator.
+ * Provides command for Navigator
  *
  * @param <T> the type of {@link Navigator}
  * @author Andrei Zaiats
- * @since 0.1.1
+ * @since 0.2.1
  */
-public abstract class NavigatingViewModel<T extends Navigator> extends BaseViewModel {
-
-    @Nullable protected T navigator;
+public interface NavigationCommand<T extends Navigator> {
 
     /**
-     * Setter for navigator
-     * @param navigator {@link Navigator} for this ViewModel
+     * Defines the method to be called when the command is invoked.
+     *
+     * @param navigator navigator instance
      */
-    public void setNavigator(@Nullable T navigator) {
-        this.navigator = navigator;
-    }
+    void execute(@NonNull T navigator);
 }

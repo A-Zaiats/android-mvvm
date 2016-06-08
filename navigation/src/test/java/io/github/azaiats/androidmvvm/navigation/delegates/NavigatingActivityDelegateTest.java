@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.delegates;
+package io.github.azaiats.androidmvvm.navigation.delegates;
 
 import android.app.Activity;
 
@@ -26,8 +26,10 @@ import org.mockito.MockitoAnnotations;
 
 import io.github.azaiats.androidmvvm.core.common.BindingConfig;
 import io.github.azaiats.androidmvvm.core.common.MvvmView;
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegateCallback;
+import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
+import io.github.azaiats.androidmvvm.testutils.ReflectionUtils;
 
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
@@ -69,21 +71,21 @@ public class NavigatingActivityDelegateTest {
     public void testSetNavigatorOnCreate() {
         when(callback.getMvvmView()).thenReturn(view);
         when(callback.createViewModel()).thenReturn(viewModel);
-        when(view.getBindingConfig()).thenReturn(new BindingConfig(0));
+        when(view.getBindingConfig()).thenReturn(new BindingConfig(0, 0));
         delegate.onCreate();
         verify(viewModel).setNavigator(navigator);
     }
 
     @Test
     public void testRemoveNavigatorOnDestroy() {
-        delegate.viewModel = viewModel;
+        ReflectionUtils.setParentField(delegate, "viewModel", viewModel);
         delegate.onDestroy();
         verify(viewModel).setNavigator(null);
     }
 
     @Test
     public void testNoNullPointerOnNavigatorDeleteIfViewModelRemoved() {
-        assertNull(delegate.viewModel);
+        assertNull(ReflectionUtils.getParentField(delegate, "viewModel"));
         delegate.onDestroy();
     }
 }

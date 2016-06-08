@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.delegates;
+package io.github.azaiats.androidmvvm.navigation.delegates;
 
 import android.support.annotation.NonNull;
 
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
+
 
 /**
  * The base callback for Activity/Fragment delegates with navigation support.

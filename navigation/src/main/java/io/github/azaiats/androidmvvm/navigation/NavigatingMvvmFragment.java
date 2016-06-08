@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core;
+package io.github.azaiats.androidmvvm.navigation;
 
 import android.databinding.ViewDataBinding;
 
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.core.MvvmFragment;
 import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegate;
 import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegateCallback;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingDelegateCallback;
-import io.github.azaiats.androidmvvm.core.delegates.NavigatingFragmentDelegate;
+import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
+import io.github.azaiats.androidmvvm.navigation.delegates.NavigatingDelegateCallback;
+import io.github.azaiats.androidmvvm.navigation.delegates.NavigatingFragmentDelegate;
 
 /**
- * MvvmDialogFragment that supports Navigator
+ * MvvmFragment that supports Navigator
  *
  * @param <T> the type of {@link Navigator}
  * @param <S> the type of {@link ViewDataBinding}
@@ -34,9 +35,9 @@ import io.github.azaiats.androidmvvm.core.delegates.NavigatingFragmentDelegate;
  * @author Andrei Zaiats
  * @since 0.2.0
  */
-public abstract class NavigatingMvvmDialogFragment<T extends Navigator, S extends ViewDataBinding,
+public abstract class NavigatingMvvmFragment<T extends Navigator, S extends ViewDataBinding,
         U extends NavigatingViewModel<T>>
-        extends MvvmDialogFragment<S, U> implements FragmentDelegateCallback<S, U>, NavigatingDelegateCallback<T> {
+        extends MvvmFragment<S, U> implements FragmentDelegateCallback<S, U>, NavigatingDelegateCallback<T> {
 
     private NavigatingFragmentDelegate<T, S, U> delegate;
 

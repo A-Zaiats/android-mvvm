@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.delegates;
+package io.github.azaiats.androidmvvm.navigation.delegates;
 
 import android.databinding.ViewDataBinding;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.core.delegates.DelegateCallback;
+import io.github.azaiats.androidmvvm.core.delegates.FragmentDelegate;
+import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
 
 /**
  * A navigated delegate for Fragments lifecycle.

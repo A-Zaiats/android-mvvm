@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.common;
+package io.github.azaiats.androidmvvm.navigation.common;
 
 /**
  * Used to navigate through application

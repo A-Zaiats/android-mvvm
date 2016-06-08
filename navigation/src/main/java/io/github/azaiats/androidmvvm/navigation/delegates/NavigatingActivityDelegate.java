@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.azaiats.androidmvvm.core.delegates;
+package io.github.azaiats.androidmvvm.navigation.delegates;
 
 import android.app.Activity;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
-import io.github.azaiats.androidmvvm.core.common.NavigatingViewModel;
-import io.github.azaiats.androidmvvm.core.common.Navigator;
+import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
+import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegateCallback;
+import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.navigation.common.Navigator;
 
 /**
  * A navigated delegate for Activities lifecycle.
