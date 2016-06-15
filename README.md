@@ -32,6 +32,11 @@ Don't forget to **enable Data Binding** in your module:
     }
 
 
+## TODO
+- Add binding for custom `android.view.View`
+- Add binding for `android.widget.ListView` adapter
+- Add binding for `android.support.v7.widget.RecyclerView` adapter/viewHolder
+
 ## Changelog
 The changelog can be found in the [release section](https://github.com/A-Zaiats/android-mvvm/releases)
 
