@@ -54,6 +54,100 @@
 <h2>
 <a id="implementation-with-android-mvvm-library" class="anchor" href="#implementation-with-android-mvvm-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implementation with android-mvvm library</h2>
 
+<ol>
+<li>Install android-mvvm library</li>
+</ol>
+
+<div class="highlight highlight-source-groovy"><pre>repositories {
+    maven { url <span class="pl-s"><span class="pl-pds">"</span>https://dl.bintray.com/a-zaiats/maven<span class="pl-pds">"</span></span> }
+}
+
+dependencies {
+    compile <span class="pl-s"><span class="pl-pds">"</span>io.github.azaiats.androidmvvm:androidmvvm-core:<span class="pl-smi">$a<span class="pl-smi">ndroidmvvm_version</span></span><span class="pl-pds">"</span></span>
+    compile <span class="pl-s"><span class="pl-pds">"</span>io.github.azaiats.androidmvvm:androidmvvm-navigation:<span class="pl-smi">$a<span class="pl-smi">ndroidmvvm_version</span></span><span class="pl-pds">"</span></span> <span class="pl-c">// optional navigation feature</span>
+}</pre></div>
+
+<ol>
+<li>Enable Data Binding</li>
+</ol>
+
+<div class="highlight highlight-source-groovy"><pre>android {
+    dataBinding {
+        enabled <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+    }
+}</pre></div>
+
+<ol>
+<li>Create your ViewModel class by extending <a href="https://github.com/A-Zaiats/android-mvvm/blob/master/core/src/main/java/io/github/azaiats/androidmvvm/core/common/BaseViewModel.java">BaseViewModel</a>. For example:</li>
+</ol>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyViewModel</span> <span class="pl-k">extends</span> <span class="pl-e">BaseViewModel</span> {
+  <span class="pl-c1">....</span>
+}</pre></div>
+
+<ol>
+<li>Each <strong>Activity</strong>, <strong>Fragment</strong> or <strong>DialogFragment</strong> that you would like to associate with a ViewModel will need either to extend <a href="https://github.com/A-Zaiats/android-mvvm/blob/master/core/src/main/java/io/github/azaiats/androidmvvm/core/MvvmActivity.java">MvvmActivity</a>/<a href="https://github.com/A-Zaiats/android-mvvm/blob/master/core/src/main/java/io/github/azaiats/androidmvvm/core/MvvmFragment.java">MvvmFragment</a>/<a href="https://github.com/A-Zaiats/android-mvvm/blob/master/core/src/main/java/io/github/azaiats/androidmvvm/core/MvvmDialogFragment.java">MvvmDialogFragment</a> or copy the implementation from these classes to your base activity/fragment/dialogFragment class (in case you can't inherit directly). Override <code>createViewModel()</code> to return the corresponding ViewModel (It can be created by directly or injected via DI). Override <code>getBindingConfig()</code> to return the corresponding BindingConfig (will be described later). For example:</li>
+</ol>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyFragment</span> <span class="pl-k">extends</span> <span class="pl-e">MvvmFragment&lt;<span class="pl-smi">FragmentMyBinding</span>, <span class="pl-smi">MyViewModel</span>&gt;</span> {
+
+    <span class="pl-k">@Override</span>
+    <span class="pl-k">public</span> <span class="pl-smi">MyViewModel</span> <span class="pl-en">createViewModel</span>() {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">MyViewModel</span>();
+    }
+
+    <span class="pl-k">@Override</span>
+    <span class="pl-k">public</span> <span class="pl-smi">BindingConfig</span> <span class="pl-en">getBindingConfig</span>() {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">BindingConfig</span>(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>fragment_my, <span class="pl-c1">BR</span><span class="pl-k">.</span>viewModel);
+    }
+}</pre></div>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
+
+<h4>
+<a id="bindingconfig" class="anchor" href="#bindingconfig" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>BindingConfig</h4>
+
+<p>BindingConfig represents configuration for DataBinging creation. It contains 2 parameters:</p>
+
+<ul>
+<li>layout resource ID for this view</li>
+<li>Data Binding variable name for injecting the ViewModel. BindingConfig can be created without viewModelVariableName if the name of the binding is <code>viewModel</code>.</li>
+</ul>
+
+<h4>
+<a id="viewmodel" class="anchor" href="#viewmodel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ViewModel</h4>
+
+<p>ViewModel has its own lifecycle:</p>
+
+<ul>
+<li>Method <code>onCreate()</code> will be called on ViewModel creation. This is a place to do any initialisation.</li>
+<li>Method <code>onDestroy()</code> will be called before ViewModel destroying. This is a place to do any cleanup.</li>
+<li>Method <code>onResume()</code> will be called when this ViewModel was binded to a view and the view is visible.</li>
+<li>Method <code>onPause()</code> will be called when this ViewModel was unbinded from a view or view was paused.</li>
+<li>Method <code>isRunning</code> tells if Activity/Fragment is in RUNNING state (in between <code>onResume()</code> and <code>onPause()</code>)</li>
+</ul>
+
+<h4>
+<a id="mvvmactivitymvvmfragmentmvvmdialogfragment" class="anchor" href="#mvvmactivitymvvmfragmentmvvmdialogfragment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MvvmActivity/MvvmFragment/MvvmDialogFragment</h4>
+
+<p>After creation you can call <code>getViewModel()</code> or <code>getBinding()</code> if you want interact with your ViewModel or Binding. Also, if you want to add <code>Observable.OnPropertyChangedCallback</code> to your ViewModel's observable field, you can call <code>addOnPropertyChangedCallback(Observable.OnPropertyChangedCallback callback)</code>. This callback will be removed on activity/fragment destroy, so you needn't disturb about memory leaks.</p>
+
+<h1>
+<a id="navigation" class="anchor" href="#navigation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Navigation</h1>
+
+<p>By MVVM pattern, ViewModel hasn't reference to View. So ViewModel can't interact with activity/fragment directly. But we need run navigation commands in our ViewModel (e.g. start new Activity or replace Fragment via FragmentManager). To resolve it, you can use some event bus library (e.g. <a href="http://square.github.io/otto/">Otto</a>), <a href="https://github.com/ReactiveX/RxJava">RxJava</a>, or androidmvvm-navigation extension. There are navigating versions of MvvmActivity/MvvmFragment/MvvmDialogFragment in this extension.</p>
+
+<h2>
+<a id="how-to-use-1" class="anchor" href="#how-to-use-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
+
+<ol>
+<li>Create your interface that extends <a href="https://github.com/A-Zaiats/android-mvvm/blob/master/navigation/src/main/java/io/github/azaiats/androidmvvm/navigation/common/Navigator.java">Navigator</a>. Add navigation methods to it.</li>
+<li>Create your ViewModel class by extending <a href="https://github.com/A-Zaiats/android-mvvm/blob/master/navigation/src/main/java/io/github/azaiats/androidmvvm/navigation/common/NavigatingViewModel.java">NavigatingViewModel</a>.</li>
+<li>Extend your Activity/Fragment/DialogFragment from <a href="https://github.com/A-Zaiats/android-mvvm/blob/master/navigation/src/main/java/io/github/azaiats/androidmvvm/navigation/NavigatingMvvmActivity.java">NavigatingMvvmActivity</a>/<a href="https://github.com/A-Zaiats/android-mvvm/blob/master/navigation/src/main/java/io/github/azaiats/androidmvvm/navigation/NavigatingMvvmFragment.java">NavigatingMvvmFragment</a>/<a href="https://github.com/A-Zaiats/android-mvvm/blob/master/navigation/src/main/java/io/github/azaiats/androidmvvm/navigation/NavigatingMvvmDialogFragment.java">NavigatingMvvmDialogFragment</a> to provide Navigator.</li>
+<li>Use <code>navigator</code> directly from your ViewModel to call it's methods. Note that <code>navigator</code> can be <code>null</code> if ViewModel is detached from View (e.g. when a screen was rotated). Alternate you can call <code>executeNavigationCommand(NavigationCommand&lt;T&gt; navigationCommand)</code>. In this case, a command will be executed immediately if Navigator is attached. Otherwise, it will be saved and executed on Navigator attach.</li>
+</ol>
+
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/A-Zaiats/android-mvvm">Android-mvvm</a> is maintained by <a href="https://github.com/A-Zaiats">A-Zaiats</a>.</span>
 
