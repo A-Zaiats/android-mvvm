@@ -20,8 +20,8 @@ This library helps reduce boilerplate code in android applications:
     }
 
     dependencies {
-        compile 'io.github.azaiats.androidmvvm:androidmvvm-core:0.2.1'
-        compile 'io.github.azaiats.androidmvvm:androidmvvm-navigation:0.2.1' // optional
+        compile 'io.github.azaiats.androidmvvm:androidmvvm-core:0.2.2'
+        compile 'io.github.azaiats.androidmvvm:androidmvvm-navigation:0.2.2' // optional
     }
 
 Don't forget to **enable Data Binding** in your module:
@@ -47,6 +47,9 @@ The changelog can be found in the [release section](https://github.com/A-Zaiats/
 The library was inspired by:
 - [Android ViewModelBinding](https://github.com/jakubkinst/Android-ViewModelBinding) library by @jakubkinst
 - [Mosby](https://github.com/sockeqwe/mosby) library by @sockeqwe
+
+Thanks to the following people for helping:
+- [Or Noyman](https://github.com/restor1) (@restor1)
 
 ## License
     Copyright 2016 Andrei Zaiats
