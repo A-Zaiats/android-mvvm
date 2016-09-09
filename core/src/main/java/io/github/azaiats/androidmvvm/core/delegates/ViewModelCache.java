@@ -154,7 +154,9 @@ class ViewModelCache {
          * @param key the key
          */
         void remove(int key) {
-            cache.remove(key);
+            if (cache != null) {
+                cache.remove(key);
+            }
         }
 
         @Override
