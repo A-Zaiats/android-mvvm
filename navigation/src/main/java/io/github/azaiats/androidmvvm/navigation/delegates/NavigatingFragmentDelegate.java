@@ -65,9 +65,9 @@ public class NavigatingFragmentDelegate<T extends Navigator, S extends ViewDataB
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (viewModel != null) {
             viewModel.setNavigator(null);
         }
+        super.onDestroy();
     }
 }
