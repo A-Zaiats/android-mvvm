@@ -100,7 +100,7 @@ public class ActivityDelegateTest {
 
     @Test
     public void testDelegateToActivityFinishingCheck() {
-        when(activity.isFinishing()).thenReturn(true).thenReturn(false);
+        when(activity.isChangingConfigurations()).thenReturn(false).thenReturn(true);
         assertTrue(activityDelegate.isFinished());
         assertFalse(activityDelegate.isFinished());
     }
