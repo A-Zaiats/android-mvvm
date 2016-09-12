@@ -82,10 +82,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
                        '**/*$ViewInjector*.*',
                        '**/BuildConfig.*',
                        '**/Manifest*.*',
-                       '**/databinding/**',
-                       'io/github/azaiats/androidmvvm/core/support/WeakValueHashMap.class',
-                       'io/github/azaiats/androidmvvm/core/support/WeakValueHashMap$*.class'
-
+                       '**/databinding/**'
             ]
     )
 
