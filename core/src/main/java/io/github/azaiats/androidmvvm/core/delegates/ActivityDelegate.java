@@ -78,7 +78,7 @@ public class ActivityDelegate<T extends ViewDataBinding, S extends MvvmViewModel
 
     @Override
     protected boolean isFinished() {
-        return delegatedActivity.isFinishing();
+        return !delegatedActivity.isChangingConfigurations();
     }
 
     @Nullable
