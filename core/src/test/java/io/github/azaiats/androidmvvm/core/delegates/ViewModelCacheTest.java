@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import io.github.azaiats.androidmvvm.core.BuildConfig;
@@ -41,7 +42,7 @@ import static org.mockito.Mockito.mock;
  * @author Andrei Zaiats
  * @since 0.2.0
  */
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(sdk = 21, constants = BuildConfig.class)
 public class ViewModelCacheTest {
 
