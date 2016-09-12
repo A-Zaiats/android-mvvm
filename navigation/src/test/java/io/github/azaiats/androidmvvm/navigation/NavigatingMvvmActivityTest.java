@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import io.github.azaiats.androidmvvm.core.delegates.ActivityDelegate;
@@ -32,7 +33,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Andrei Zaiats
  */
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(sdk = 21, constants = io.github.azaiats.androidmvvm.core.BuildConfig.class)
 public class NavigatingMvvmActivityTest {
 
