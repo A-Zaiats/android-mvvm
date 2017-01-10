@@ -25,6 +25,9 @@ android {
         sourceCompatibility rootProject.ext.javaSourceCompatibility
         targetCompatibility rootProject.ext.javaTargetCompatibility
     }
+    lintOptions {
+        disable 'RestrictedApi' // while bug https://code.google.com/p/android/issues/detail?id=230387&can=1&q=component%3DTools&sort=-modified&colspec=ID%20Type%20Status%20Owner%20Summary%20Stars%20Modified
+    }                           // remove after 2.3.0-beta2 release
 }
 
 dependencies {
@@ -43,7 +46,6 @@ publish {
     groupId = GROUP
     artifactId = 'androidmvvm-navigation'
     version = VERSION_NAME
-    uploadName = GROUP
     description = DESCRIPTION
     website = WEBSITE
     issueTracker = ISSUE_TRACKER

@@ -4,7 +4,7 @@ Check [Android-mvvm page](http://a-zaiats.github.io/android-mvvm/) for more info
 
 [![Build Status](https://travis-ci.org/A-Zaiats/android-mvvm.svg?branch=master)](https://travis-ci.org/A-Zaiats/android-mvvm)
 [![codecov](https://codecov.io/gh/A-Zaiats/android-mvvm/coverage.svg?branch=master)](https://codecov.io/gh/A-Zaiats/android-mvvm)
-[ ![Download](https://api.bintray.com/packages/a-zaiats/maven/io.github.azaiats.androidmvvm/images/download.svg) ](https://bintray.com/a-zaiats/maven/io.github.azaiats.androidmvvm/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/a-zaiats/maven/androidmvvm-core/images/download.svg) ](https://bintray.com/a-zaiats/maven/androidmvvm-core/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--mvvm-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3775)
 
 ## Features
@@ -20,8 +20,8 @@ This library helps reduce boilerplate code in android applications:
     }
 
     dependencies {
-        compile 'io.github.azaiats.androidmvvm:androidmvvm-core:0.2.2'
-        compile 'io.github.azaiats.androidmvvm:androidmvvm-navigation:0.2.2' // optional
+        compile 'io.github.azaiats.androidmvvm:androidmvvm-core:0.2.3'
+        compile 'io.github.azaiats.androidmvvm:androidmvvm-navigation:0.2.3' // optional
     }
 
 Don't forget to **enable Data Binding** in your module:
@@ -32,11 +32,6 @@ Don't forget to **enable Data Binding** in your module:
         }
     }
 
-
-## TODO
-- Add binding for custom `android.view.View`
-- Add binding for `android.widget.ListView` adapter
-- Add binding for `android.support.v7.widget.RecyclerView` adapter/viewHolder
 
 ## Changelog
 The changelog can be found in the [release section](https://github.com/A-Zaiats/android-mvvm/releases)
