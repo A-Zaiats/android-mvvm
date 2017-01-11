@@ -1,6 +1,6 @@
 package io.github.azaiats.androidmvvm.sample.viewmodels;
 
-import io.github.azaiats.androidmvvm.core.common.BaseViewModel;
+import io.github.azaiats.androidmvvm.common.BaseViewModel;
 
 /**
  * @author Andrei Zaiats

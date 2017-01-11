@@ -33,4 +33,5 @@ ext {
     junit_version = '4.12'
     mockito_version = '2.5.4'
     robolectric_version = '3.1.4'
+    opengl_version = 'gl1.1-android-2.1_r1'
 }

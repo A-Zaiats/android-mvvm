@@ -8,7 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import io.github.azaiats.androidmvvm.R;
-import io.github.azaiats.androidmvvm.navigation.common.Navigator;
+import io.github.azaiats.androidmvvm.common.Navigator;
 import io.github.azaiats.androidmvvm.sample.fragments.FirstFragment;
 import io.github.azaiats.androidmvvm.sample.fragments.SecondFragment;
 

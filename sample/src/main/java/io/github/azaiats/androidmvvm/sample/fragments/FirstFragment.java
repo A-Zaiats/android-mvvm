@@ -2,9 +2,9 @@ package io.github.azaiats.androidmvvm.sample.fragments;
 
 import android.support.annotation.NonNull;
 
+import io.github.azaiats.androidmvvm.MvvmFragment;
 import io.github.azaiats.androidmvvm.R;
-import io.github.azaiats.androidmvvm.core.MvvmFragment;
-import io.github.azaiats.androidmvvm.core.common.BindingConfig;
+import io.github.azaiats.androidmvvm.common.BindingConfig;
 import io.github.azaiats.androidmvvm.databinding.FragmentFirstBinding;
 import io.github.azaiats.androidmvvm.sample.viewmodels.FirstFragmentViewModel;
 

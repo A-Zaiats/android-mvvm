@@ -1,6 +1,6 @@
 package io.github.azaiats.androidmvvm.sample.viewmodels;
 
-import io.github.azaiats.androidmvvm.navigation.common.NavigatingViewModel;
+import io.github.azaiats.androidmvvm.common.NavigatingViewModel;
 import io.github.azaiats.androidmvvm.sample.navigators.MainNavigator;
 import io.github.azaiats.androidmvvm.sample.utils.AppPreferences;
 

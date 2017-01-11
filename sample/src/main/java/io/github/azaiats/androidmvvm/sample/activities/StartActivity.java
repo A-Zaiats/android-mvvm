@@ -2,10 +2,10 @@ package io.github.azaiats.androidmvvm.sample.activities;
 
 import android.support.annotation.NonNull;
 
+import io.github.azaiats.androidmvvm.NavigatingMvvmActivity;
 import io.github.azaiats.androidmvvm.R;
-import io.github.azaiats.androidmvvm.core.common.BindingConfig;
+import io.github.azaiats.androidmvvm.common.BindingConfig;
 import io.github.azaiats.androidmvvm.databinding.ActivityStartBinding;
-import io.github.azaiats.androidmvvm.navigation.NavigatingMvvmActivity;
 import io.github.azaiats.androidmvvm.sample.navigators.StartNavigator;
 import io.github.azaiats.androidmvvm.sample.utils.AppPreferences;
 import io.github.azaiats.androidmvvm.sample.viewmodels.StartViewModel;

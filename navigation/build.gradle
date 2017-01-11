@@ -40,6 +40,7 @@ dependencies {
     testCompile "org.mockito:mockito-core:$rootProject.ext.mockito_version"
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectric_version"
     testCompile "org.robolectric:shadows-support-v4:$rootProject.ext.robolectric_version"
+    testCompile "org.khronos:opengl-api:$rootProject.ext.opengl_version" // needs for robolectric
 }
 
 publish {
