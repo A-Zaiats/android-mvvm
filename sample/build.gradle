@@ -21,9 +21,6 @@ android {
     dataBinding {
         enabled = true
     }
-    lintOptions {
-        disable 'RestrictedApi' // while bug https://code.google.com/p/android/issues/detail?id=230387&can=1&q=component%3DTools&sort=-modified&colspec=ID%20Type%20Status%20Owner%20Summary%20Stars%20Modified
-    }                           // remove after 2.3.0-beta2 release
 }
 
 dependencies {

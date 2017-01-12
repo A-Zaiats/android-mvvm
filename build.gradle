@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0-beta1'
+        classpath 'com.android.tools.build:gradle:2.3.0-beta2'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
@@ -32,6 +32,6 @@ ext {
     support_version = '25.1.0'
     junit_version = '4.12'
     mockito_version = '2.5.4'
-    robolectric_version = '3.1.4'
+    robolectric_version = '3.2.2'
     opengl_version = 'gl1.1-android-2.1_r1'
 }
