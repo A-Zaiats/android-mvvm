@@ -1,3 +1,6 @@
+# Deprecatet!
+This project is deprecated.
+
 # android-mvvm
 A Model-View-ViewModel library for Android apps.
 Check [Android-mvvm page](http://a-zaiats.github.io/android-mvvm/) for more information.
